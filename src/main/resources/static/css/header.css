@@ -1,0 +1,18 @@
+:root {
+    --colrA: #3B8BEB;
+    --colrB: #B23850;
+    --colrC: #E7E3D4;
+    --colrD: #C4DBF6;
+    --colrE: #8590AA;
+    --colrF: #84eef1;
+    --colrG: #E3E3E3;
+}
+
+body {
+    background-color: var(--colrG);
+}
+
+.sf-header {
+    height: 60px;
+    background-color: var(--colrF);
+}

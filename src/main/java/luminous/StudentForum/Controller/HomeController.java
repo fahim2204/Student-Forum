@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,18 +38,25 @@ public class HomeController {
         return "home";
     }*/
 
+    // @RequestMapping("/**")
+    // public String notFound() {
+    //     return "errors/404";
+    // }
+
 
     @RequestMapping("/")
-      public ModelAndView hello(@RequestParam("myname") String name, HttpSession session,HttpServletRequest request, ModelAndView modelAndView){
+      public ModelAndView hello(HttpSession session,HttpServletRequest request, ModelAndView modelAndView){
     
         String email = "fahim@gmail.com";
-        modelAndView.addObject("name", name);
+        // modelAndView.addObject("name", name);
         session.setAttribute("age", 15);
         modelAndView.addObject("email", email);
         modelAndView.addObject("date", new Date(System.currentTimeMillis()));
         modelAndView.setViewName("home");
         return modelAndView;
     }
+
+
     @RequestMapping("alien")
       public ModelAndView alien(ModelAndView modelAndView, Alien alien ){
     
