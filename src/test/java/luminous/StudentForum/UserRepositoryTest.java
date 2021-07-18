@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
-import luminous.StudentForum.model.User;
+import luminous.StudentForum.model.UserData;
 import luminous.StudentForum.repository.UserRepository;
 
 @DataJpaTest
@@ -27,14 +27,14 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testCreateUser() {
-		User user = new User();
+		UserData user = new UserData();
 		user.setName("Fahim Faisal");
 		user.setUserName("fahim");
 		user.setPassword("hello");
 		user.setType("admin");
 		
-		User savedUser = repo.save(user);
-		User existUser =  entityManager.find(User.class, savedUser.getId());
+		UserData savedUser = repo.save(user);
+		UserData existUser =  entityManager.find(UserData.class, savedUser.getId());
 		assertThat(existUser.getUserName()).isEqualTo(user.getUserName());
 	}
 	
