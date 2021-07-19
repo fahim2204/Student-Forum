@@ -8,5 +8,5 @@ public class StudentForumApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StudentForumApplication.class, args);
 	}
-
 }
+

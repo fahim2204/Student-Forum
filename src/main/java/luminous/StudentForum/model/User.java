@@ -1,5 +1,7 @@
 package luminous.StudentForum.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class UserData {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,10 +39,10 @@ public class UserData {
     private String confirmPassword;
 
     @Column(nullable = false, columnDefinition = "varchar(50) default 'student'")
-    private String type;
+    private String type = "student";
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 1")
-    private short status;
+    private short status = 1;
 
 
     public void setId(Long id) {
