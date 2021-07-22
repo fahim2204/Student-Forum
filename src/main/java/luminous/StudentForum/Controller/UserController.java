@@ -7,16 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.classic.Logger;
+import luminous.StudentForum.model.User;
+import luminous.StudentForum.service.UserService;
 
 @Controller
 public class UserController {
     
     private static final org.jboss.logging.Logger log = LoggerFactory.logger(RegistrationController.class);
+    private UserService userService;
 
 
     @GetMapping("/user/{username}")
     @ResponseBody
     public String GetUserProfile(@PathVariable("username") String username){
-        return username;
+       
+        return  userService.loadUserByUsername(username).getUsername();
     }
 }

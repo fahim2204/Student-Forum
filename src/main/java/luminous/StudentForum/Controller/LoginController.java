@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import luminous.StudentForum.model.LoginData;
 
 
 @Controller
 public class LoginController {
     @GetMapping("/login")
     public ModelAndView LoginView(ModelAndView modelAndView){
-        modelAndView.addObject("loginData", new LoginData());
+        //modelAndView.addObject("loginData", new LoginData());
         modelAndView.setViewName("login");
         return modelAndView;
     }

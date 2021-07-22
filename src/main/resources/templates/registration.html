@@ -19,12 +19,12 @@
         </div>
         <!-- user name section -->
         <div class="mx-5 my-4 ">
-            <label for="userName" class="form-label fw-bold ">Username:</label>
+            <label for="username" class="form-label fw-bold ">Username:</label>
             <div class="input-group ">
                 <span class="input-group-text "> <i class="fas fa-user"></i></span>
-                <input type="text " name="userName" class="form-control rounded-end" th:classappend="${#fields.hasErrors('userName')?'is-invalid':''}" id="userName" placeholder="Enter a Username " th:value="*{userName}">
+                <input type="text " name="userName" class="form-control rounded-end" th:classappend="${#fields.hasErrors('username')?'is-invalid':''}" id="username" placeholder="Enter a Username " th:value="*{username}">
             </div>
-            <div th:each="e:${#fields.errors('userName')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
+            <div th:each="e:${#fields.errors('username')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
         </div>
 
         <!-- Password section -->

@@ -1,9 +1,7 @@
-package luminous.StudentForum.service;
+package luminous.StudentForum.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import luminous.StudentForum.model.User;
-
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -11,7 +9,7 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private User user;
+    private final User user;
 
     public UserPrincipal(User user) {
         super();
@@ -22,7 +20,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getType().toUpperCase())); // "ROLE_" prefix is Must
     }
 
     @Override
@@ -32,7 +30,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getUsername();
     }
 
     @Override

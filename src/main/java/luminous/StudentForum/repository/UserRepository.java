@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-	User findByUserName(String username);
+	User findByUsername(String username);
 	List <User> findByName(String name);
 	@Query("from User where name=?1 order by user_name")
 	List <User> findByNameSortedAsc(String name);

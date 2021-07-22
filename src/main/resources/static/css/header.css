@@ -14,5 +14,5 @@ body {
 
 .sf-header {
     height: 60px;
-    background-color: var(--colrF);
+    /* background-color: var(--colrF); */
 }

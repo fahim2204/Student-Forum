@@ -5,6 +5,15 @@
 
 </div>
 
+
+
+
+<div class="border border-0 border-dark rounded">
+    <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/admin}">Admin</a>
+    <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/moderator}">Moderator</a>
+    <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/student}">Student</a>
+</div>
+
 <!-- <p th:text="${name}"></p> -->
 <h4 th:text="${email}"></h4>
 <h4 th:text="'Converting to UpperCase = '+${#strings.toUpperCase(email)}"></h4>
@@ -13,21 +22,7 @@
 <h1 th:text="${session.age}"></h1>
 <img th:src="@{/image/fav/apple-touch-icon.png}" alt="HEllo">
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-    (function() {
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/60ec4ae7649e0a0a5ccbcb74/1fadg96ae';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
+
 
 <div th:with="a=10, b=34, text = 'hello world'">
     <h1 th:text="${text}"></h1>

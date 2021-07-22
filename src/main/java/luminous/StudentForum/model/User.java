@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -23,19 +24,20 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
-    @NotBlank
-    private String userName;
+    @NotNull
+    private String username;
 
     @Column(nullable = false, length = 60)
-    @NotBlank
+    @NotNull
     private String name;
 
     @Column(nullable = false, length = 200)
-    @NotBlank
+    @NotNull
     @Size(min = 4)
     private String password;
 
     @Transient
+    @NotNull
     private String confirmPassword;
 
     @Column(nullable = false, columnDefinition = "varchar(50) default 'student'")
@@ -69,11 +71,11 @@ public class User {
     public String getType() {
         return type;
     }
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
     public short getStatus() {
         return status;
@@ -89,7 +91,7 @@ public class User {
     }
 	@Override
 	public String toString() {
-		return "UserData [id=" + id + ", userName=" + userName + ", name=" + name + ", password=" + password
+		return "UserData [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password
 				+ ", confirmPassword=" + confirmPassword + ", type=" + type + ", status=" + status + "]";
 	}
 
