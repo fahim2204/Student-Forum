@@ -1,7 +1,8 @@
 <!-- HTML starting boilerplate  -->
 <div th:fragment="htmlhead(title)">
     <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
     <head>
         <meta charset="UTF-8">
@@ -32,27 +33,71 @@
 <!-- Header and Navmenu Section -->
 <div th:fragment="header">
     <div class="container sf-header border border-1 border-dark rounded-bottom">
-        <header>
-            <div class="row flex-nowrap align-items-center h-100">
-                <div class="col-1">
-                    <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" />
+        <div class="row flex-nowrap align-items-center h-100">
+            <div class="col-1">
+                <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" />
 
-                </div>
-                <div class="col-2">
-                    <input class="form-control me-0" type="text" name="search" id="search" placeholder="search">
-                </div>
-                <div class="col-1">
-                    <button class="btn btn-primary ms-0">Search</button>
-                </div>
-                <div class="col-4 text-center">
-                    <a class="text-dark fs-3 text-decoration-none" th:href="@{/}">Student Portal</a>
-                </div>
-                <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-success me-3" th:href="@{/registration}">Register</a>
-                    <a class="btn btn-outline-primary me-3" th:href="@{/login}">Login</a>
+            </div>
+            <div class="col-2">
+                <input class="form-control me-0" type="text" name="search" id="search" placeholder="search">
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary ms-0">Search</button>
+            </div>
+            <div class="col-4 text-center">
+                <a class="text-dark fs-3 text-decoration-none" th:href="@{/}">Student Portal</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="btn btn-outline-success me-3" th:href="@{/registration}">Register</a>
+                <a class="btn btn-outline-primary me-3" th:href="@{/login}">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Header and Navmenu Section After Login -->
+<div th:fragment="headerAfterLogin">
+    <div class="container sf-header border border-1 border-dark rounded-bottom">
+        <div class="row flex-nowrap align-items-center h-100">
+            <div class="col-1">
+                <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" />
+            </div>
+            <div class="col-2">
+                <input class="form-control me-0" type="text" name="search" id="search" placeholder="search">
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary ms-0">Search</button>
+            </div>
+            <div class="col-4 text-center">
+                <a class="text-dark fs-3 text-decoration-none" th:href="@{/}">Student Portal</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <div class="row w-100">
+                    <div class="col-3 my-auto">
+                        <button class="bg-transparent border-0" onclick="ShowNotification();">
+                                <span class="far fa-bell fa-2x"></span>
+                            </button>
+                    </div>
+                    <div class="col-9">
+                        <div class="row pe-2 me-1 rounded-3 shadow">
+                            <div class="col-3  my-auto"><span class="fas fa-user-alt fa-2x"></span></div>
+                            <div class="col-7 my-auto">
+                                <div th:if="${session.sessName}!=null" th:text="${#strings.toUpperCase(session.sessName)}">Name</div>
+                                <div class="text-muted" style="font-size: 14px" th:text="${#strings.toUpperCase(session.sessType)}">Type</div>
+                            </div>
+                            <div class="col-1 my-auto">
+                                <button class="bg-transparent border-0" onclick="ShowProfileSec();">
+                                    <span class=" border border-2 border-dark rounded-3 px-1 pb-1 bg-light fas fa-sort-down"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
 </div>
 

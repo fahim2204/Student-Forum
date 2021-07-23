@@ -7,6 +7,7 @@ import luminous.StudentForum.repository.UserRepository;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 @Service
 public class UserService implements UserDetailsService {
@@ -27,16 +34,24 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private HttpSession session;
 
+    private User user;
+    
     ///--------For login credentials checking
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
+        user = userRepo.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Username not found!!");
         }
+        // session.setAttribute("fname",user.getName());
+        // System.out.println("I am from user service");
         return new UserPrincipal(user);
     }
+   
 
     public boolean userExists(String username) {
         return  userRepo.findByUsername(username) != null ? true : false;
@@ -46,6 +61,10 @@ public class UserService implements UserDetailsService {
     public void save(User user) {
         encodePassword(user);
         userRepo.save(user);
+    }
+
+    public User GetLoggedUser(){
+        return user;
     }
 
     private void encodePassword(User user) {

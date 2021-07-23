@@ -67,7 +67,7 @@ public class RegistrationController {
             }
         }
         log.info(user.toString());
-        log.info("++++++++++++=======+++++++++");
+        // log.info("++++++++++++=======+++++++++");
         if (result.hasErrors()) {
             return "registration";
         }else{
