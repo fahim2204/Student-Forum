@@ -23,21 +23,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 50)
-    @NotNull
+    @Column(nullable = false, length = 50)
+    @NotNull(message = "Field can''t leave empty!!")
+    @Size(min = 3, message = "Value must be greater than 3 character!!")
     private String username;
 
     @Column(nullable = false, length = 60)
-    @NotNull
+    @NotNull(message = "Field can''t leave empty!!")
+    @Size(min = 3, message = "Value must be greater than 3 character!!")
     private String name;
 
     @Column(nullable = false, length = 200)
-    @NotNull
-    @Size(min = 4)
+    @NotNull(message = "Field can''t leave empty!!")
+    @Size(min = 4, message = "Value must be greater than 4 character!!")
     private String password;
 
     @Transient
-    @NotNull
+    @NotNull(message = "Field can''t leave empty!!")
     private String confirmPassword;
 
     @Column(nullable = false, columnDefinition = "varchar(50) default 'student'")

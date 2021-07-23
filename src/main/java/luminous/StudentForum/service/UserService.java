@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    ///--------For login credentials checking
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
@@ -38,21 +39,10 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean userExists(String username) {
-        System.out.println("+++++++");
-        System.out.println("+++++++");
-        System.out.println(userRepo.findByUsername(username).getUsername());
-        System.out.println("+++++++");
-        System.out.println("+++++++");
-        System.out.println("+++++++");
-        if (userRepo.findByUsername(username).getUsername() == null) {
-        // if (userRepo.findByUsername(username).getUsername().isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
-        // return findByUsername(username).isPresent();
+        return  userRepo.findByUsername(username) != null ? true : false;
     }
 
+    ///---------- Saving the user registration
     public void save(User user) {
         encodePassword(user);
         userRepo.save(user);

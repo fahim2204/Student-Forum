@@ -35,14 +35,14 @@ public class WebSecurityConfigaration extends WebSecurityConfigurerAdapter {
         .anyRequest()
         .permitAll()
                 .and()
-                .formLogin().loginPage("/login").usernameParameter("userName").defaultSuccessUrl("/")
+                .formLogin().loginPage("/login").usernameParameter("username").defaultSuccessUrl("/")
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll();
         // .httpBasic();
     }
 
-
+    //////--------------Decrypt password during login
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());

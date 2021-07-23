@@ -4,7 +4,16 @@
 
 <div class="container rounded-3 bg-light mt-5 p-4 shadow " style="width: 500px">
 
-    <h1 class=" text-secondary text-center fw-bold mb-5 ">login</h1>
+    <div class="row">
+        <div class="col-4 text-center">
+            <a th:href="@{/}"><img class="w-50" th:src="@{image/logo.png}" alt="logo"></a>
+        </div>
+        <div class="col-4">
+            <h2 class=" text-secondary text-center fw-bold">login</h2>
+        </div>
+        <div class="col-4"></div>
+    </div>
+
 
     <form th:action="@{/login}" method="POST">
         <!-- User name section -->
@@ -12,11 +21,8 @@
             <label for="username " class="form-label fw-bold ">User Name:</label>
             <div class="input-group">
                 <span class="input-group-text"> <i class="fas fa-user "></i></span>
-                <input type="text" name="userName" class="form-control rounded-end" id="userName " placeholder="Type your Username">
+                <input type="text" name="username" class="form-control rounded-end" id="username " placeholder="Type your Username">
             </div>
-            <!-- <div th:each="e:${#fields.errors('username')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div> -->
-            <!-- <div class="invalid-feedback d-block">Hello</div> -->
-            <!-- <div th:each="e:${#fields.errors('userName')}" th:text="${e}" class="alert alert-warning d-flex justify-content-center my-1 py-0" role="alert"></div> -->
         </div>
         <!-- Password section -->
         <div class="mx-5 my- ">
@@ -25,7 +31,6 @@
                 <span class="input-group-text "> <i class="fas fa-key "></i></span>
                 <input type="password" name='password' class="form-control rounded-end" id="password" placeholder="Type your Password ">
             </div>
-            <!-- <div th:each="e:${#fields.errors('password')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div> -->
         </div>
 
         <div class="text-end mx-5 my-3 ">
@@ -40,19 +45,20 @@
             <a class="link-info " th:href="@{/registration}">Not registered yet?</a>
         </div>
 
-        <div class="alert alert-warning d-flex justify-content-center my-2" role="alert">
+        <div class="alert alert-warning d-flex justify-content-center my-1" role="alert" th:if="${param.error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
             <!-- ${SPRING_SECURITY_LAST_EXCEPTION.message} -->
             <!-- <div th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></div> -->
-            <div th:if="${param.login_error}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-                Your login attempt was not successful, try again.<br /> Reason: <span th:text="${errorMsg}">Wrong input!</span> ></div>
-            <div th:if="${param.status}">
-                <div class="alert alert-danger" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message != ''} ? ${session['SPRING_SECURITY_LAST_EXCEPTION'].message} : 'Invalid login please try again'">
-                </div>
-            </div>
+            <!-- <div  >
+                Your login attempt was not successful, try again.<br /> Reason: <span th:text="${errorMsg}">Wrong input!</span>
+            </div> -->
+            [[${errorMsg}]]
         </div>
-
-        <div class="alert alert-success d-flex justify-content-center my-2" role="alert">
-            {{session('msg')}}
+        <div class="alert alert-warning d-flex justify-content-center my-1" role="alert" th:if="${param.logout}">
+            Logged out successfully!!
+        </div>
+        <!-- ///////--------Displaying registration succes msg -->
+        <div class="alert alert-success d-flex justify-content-center my-2" role="alert" th:if="${message != null}">
+            [[${message}]]
         </div>
 
 

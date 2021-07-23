@@ -4,7 +4,15 @@
 
 <div class=" container rounded-3 bg-light mt-5 p-4 shadow " style="width: 500px ">
 
-    <h3 class=" text-secondary text-center fw-bold mb-5 " style="padding-top:15px"><i class="fas fa-graduation-cap"></i> Student Registration</h3>
+    <div class="row">
+        <div class="col-4 text-center">
+            <a th:href="@{/}"><img class="w-50" th:src="@{image/logo.png}" alt="logo"></a>
+        </div>
+        <div class="col-4">
+            <h2 class=" text-secondary text-center fw-bold">Registration</h2>
+        </div>
+        <div class="col-4"></div>
+    </div>
 
     <form th:action="@{/registration}" method="post" th:object="${user}">
 

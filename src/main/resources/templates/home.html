@@ -12,6 +12,8 @@
     <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/admin}">Admin</a>
     <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/moderator}">Moderator</a>
     <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/student}">Student</a>
+    <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/student}">Student</a>
+    <a class="d-block text text-danger text-center h1 my-3 ms-3" th:href="@{/logout}">Logout</a>
 </div>
 
 <!-- <p th:text="${name}"></p> -->
@@ -21,6 +23,9 @@
 <h4 th:text="${date}"></h4>
 <h1 th:text="${session.age}"></h1>
 <img th:src="@{/image/fav/apple-touch-icon.png}" alt="HEllo">
+<div th:if(session !=n ull)>
+    Your are logged in
+</div>
 
 
 

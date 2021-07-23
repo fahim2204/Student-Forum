@@ -16,8 +16,6 @@ public class UserPrincipal implements UserDetails {
         this.user = user;
     }
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getType().toUpperCase())); // "ROLE_" prefix is Must

@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import luminous.StudentForum.model.User;
@@ -54,29 +55,25 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String LoginValidation(@Valid User user, BindingResult result, HttpServletRequest request) {
-        ////-----Check if username already exists
-        log.info(request.getParameter("name"));
-        if(user.getUsername() != null && userService.userExists(request.getParameter("username"))){
+    public String LoginValidation(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+        //-----Check if username already exists
+        if(user.getUsername() != null && userService.userExists(user.getUsername())){
             result.addError(new FieldError("user", "username", "Username Already exists!!"));
         }
-        log.info(user.toString());
-        ////-----Checking for confirm password matches 
-        // if((user.getPassword()!=null && user.getConfirmPassword()!=null)){
-        //     if(!user.getPassword().equals(user.getConfirmPassword())){
-
-        //         result.addError(new FieldError("user", "confirmPassword", "Confirm Password isn't match!!"));
-        //     }
-        // }
+        //-----Checking for confirm password matches 
+        if((user.getPassword()!=null && user.getConfirmPassword()!=null)){
+            if(!user.getPassword().equals(user.getConfirmPassword())){
+                result.addError(new FieldError("user", "confirmPassword", "Confirm Password isn't match!!"));
+            }
+        }
         log.info(user.toString());
         log.info("++++++++++++=======+++++++++");
         if (result.hasErrors()) {
-            // System.out.println(loginData);
             return "registration";
-            // return "redirect:/registration";
         }else{
             userService.save(user);
-            return "/login";
+            redirectAttributes.addFlashAttribute("message","Registration is Succesfull.");
+            return "redirect:/login";
         }
     }
 
