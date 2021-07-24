@@ -1,12 +1,16 @@
 package luminous.StudentForum.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -49,6 +53,11 @@ public class User {
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 1")
     private short status = 1;
+
+    @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
+    @JoinColumn(name ="fk_user_id", referencedColumnName = "id" )
+    private List<Post> posts;
+
 
 
     public void setId(Long id) {

@@ -2,6 +2,20 @@
     <title>Admin Dashboard - Student Forum</title>
 </div>
 <div th:insert="fragments::header"></div>
+
+<div class="container">
+    <div class="row mt-1">
+        <div class="col-3 p-1 border border-danger">
+            <div th:insert="fragments::admin-sidebar"></div>
+        </div>
+        <div class="col-9 p-1 border border-success">
+            my body
+        </div>
+    </div>
+</div>
+
+
+
 <h1 class="text text-center my-2">Admin Home</h1>
 
 <div th:insert="fragments::footer"></div>

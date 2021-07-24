@@ -2,24 +2,12 @@
     <title>Home - Student Forum</title>
 </div>
 
-<div sec:authorize="!isAuthenticated()" th:insert="fragments::header"></div>
-<div sec:authorize="isAuthenticated()" th:insert="fragments::headerAfterLogin"></div>
+<div th:insert="fragments::header"></div>
 
-
-
-
-<div class="border border-0 border-dark rounded text-center">
-    <a class=" text-danger text-center h3 my-3 ms-3" th:href="@{/admin}">Admin</a><br>
-    <a class=" text-danger text-center h3 my-3 ms-3" th:href="@{/moderator}">Moderator</a><br>
-    <a class=" text-danger text-center h3 my-3 ms-3" th:href="@{/student}">Student</a><br>
-</div>
 
 <div sec:authorize="isAuthenticated()">
     Your are logged in
     <a class=" text-danger text-center h3 my-3 ms-3" th:href="@{/logout}">Logout</a><br>
-    <div class="" sec:authentication="name"></div>
-    <div class="" sec:authentication="principal.authorities"></div>
-    <div class="" th:if="${session.sessName}!=null" th:text="${session.sessName}"> </div>
 </div>
 <!-- <p th:text="${name}"></p> -->
 <h4 th:text="${email}"></h4>
