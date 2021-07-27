@@ -28,7 +28,7 @@ public class Post {
     @Size(min = 5, message = "Value must be greater than 5 character!!")
     private String title;
     
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false, length = 5000)
     @NotNull(message = "Field can''t leave empty!!")
     @Size(min = 10, message = "Value must be greater than 10 character!!")
     private String pbody;
@@ -91,7 +91,7 @@ public class Post {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-    
+
     @Override
     public String toString() {
         return "{" +
