@@ -46,6 +46,14 @@ public class Category {
         this.cname = cname;
     }
 
+
+    public List<Post> getPosts() {
+        return this.posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
     
 
 }

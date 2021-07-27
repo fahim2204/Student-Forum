@@ -102,6 +102,12 @@ public class User {
     public String getConfirmPassword() {
         return confirmPassword;
     }
+    public List<Post> getPosts() {
+        return this.posts;
+    }
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 	@Override
 	public String toString() {
 		return "UserData [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password

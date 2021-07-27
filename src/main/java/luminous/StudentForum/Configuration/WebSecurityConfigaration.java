@@ -32,7 +32,7 @@ public class WebSecurityConfigaration extends WebSecurityConfigurerAdapter {
         .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
         .antMatchers("/student/**").hasAnyAuthority("ROLE_STUDENT")
         .antMatchers("/moderator/**").hasAnyAuthority("ROLE_MODERATOR")
-        .antMatchers("/admin/**")
+        .antMatchers("/post/create")
         .authenticated()
         .anyRequest()
         .permitAll()

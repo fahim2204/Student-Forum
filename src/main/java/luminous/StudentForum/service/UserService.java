@@ -35,8 +35,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
-    @Autowired
-    private HttpSession session;
 
     private User user;
     

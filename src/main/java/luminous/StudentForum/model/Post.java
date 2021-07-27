@@ -87,8 +87,21 @@ public class Post {
         return this.createdAt;
     }
 
+    
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", title='" + getTitle() + "'" +
+            ", pbody='" + getPbody() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", views='" + getViews() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            "}";
     }
     
 }
