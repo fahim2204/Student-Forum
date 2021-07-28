@@ -52,8 +52,8 @@ public class PostController {
             //System.out.println(req.getParameter("category"));
             // Category category = catRepo.findByCname(req.getParameter("category"));
 
-            catRepo.findByCname(req.getParameter("category")).getPosts().add(post);
-            userRepo.findByUsername(session.getAttribute("sessUsername").toString()).getPosts().add(post);
+            // catRepo.findByCname(req.getParameter("category")).getPosts().add(post);
+            // userRepo.findByUsername(session.getAttribute("sessUsername").toString()).getPosts().add(post);
             postRepo.save(post);
             return "redirect:/post/create";
         // }

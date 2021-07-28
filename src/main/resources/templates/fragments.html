@@ -3,17 +3,10 @@
     <!DOCTYPE html>
     <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- For FAV Icon -->
-        <link rel="apple-touch-icon" sizes="180x180" th:href="@{/image/fav/apple-touch-icon.png}">
-        <link rel="icon" type="image/png" sizes="32x32" th:href="@{/image/fav/favicon-32x32.png}">
-        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/fav/favicon-16x16.png}">
-        <link rel="manifest" th:href="@{/image/fav/site.webmanifest}">
-
 
         <title th:replace="${title}">Student Forum</title>
 
@@ -31,11 +24,7 @@
 
         <!-- Rich Text plugin -->
         <link rel="stylesheet" th:href="@{/rich-text-editor/richtext.min.css}">
-        <script th:src="@{/rich-text-editor/jquery.richtext.js}"></script>
-
-
-
-
+        <script th:src="@{/rich-text-editor/jquery.richtext.min.js}"></script>
 
     </head>
 
@@ -47,7 +36,7 @@
 
 <!-- Header and Navmenu Section -->
 <div th:fragment="header">
-    <div class="container sf-header border border-1 border-dark rounded-bottom">
+    <div class="container sf-header">
         <div class="row flex-nowrap align-items-center h-100">
             <div class="col-1">
                 <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" />
@@ -60,7 +49,7 @@
                 <button class="btn btn-primary ms-0">Search</button>
             </div>
             <div class="col-4 text-center">
-                <a class="text-dark fs-3 text-decoration-none" th:href="@{/}">Student Portal</a>
+                <a class="sf-title" th:href="@{/}">Student Portal</a>
             </div>
             <div class="col-4 d-flex justify-content-evenly align-items-center">
                 <!-- Header and Navmenu Section Without Login -->
@@ -84,9 +73,6 @@
                                     <div class="text-muted" style="font-size: 0.75vw" th:text="${#strings.toUpperCase(session.sessType)}">Type</div>
                                 </div>
                                 <div class="col-2 d-flex align-self-center justify-content-center">
-                                    <!-- <button class="bg-transparent border-0 me-1" onclick="ShowProfileSec();">
-                                        <span class=" border border-2 border-dark rounded-3 px-1 pb-1 bg-light fas fa-sort-down"></span>
-                                    </button> -->
                                     <img class="button" src="https://img.icons8.com/ios/20/000000/circled-chevron-down.png" alt="show-menu" onclick="ShowProfileSec();" />
                                 </div>
                             </div>
@@ -94,6 +80,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Navbar Fragments -->
+<div th:fragment="nav-category">
+    <div class="container">
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+                <div th:each="cList:${categoryList}">
+                    <a class="p-2 btn link-secondary" th:href="@{'/posts/'+${cList.cname}}" th:text="${cList.cname}">Subject</a>
+                </div>
+            </nav>
         </div>
     </div>
 </div>

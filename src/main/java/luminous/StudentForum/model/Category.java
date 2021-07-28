@@ -26,9 +26,6 @@ public class Category {
     @Size(min = 2, message = "Value must be greater than 2 character!!")
     private String cname;
 
-    @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
-    @JoinColumn(name ="fk_category_id", referencedColumnName = "id" )
-    private List<Post> posts;
 
     public Short getId() {
         return this.id;
@@ -44,15 +41,6 @@ public class Category {
 
     public void setCname(String cname) {
         this.cname = cname;
-    }
-
-
-    public List<Post> getPosts() {
-        return this.posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
     }
     
 

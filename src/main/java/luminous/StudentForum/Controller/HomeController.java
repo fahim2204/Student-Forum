@@ -5,14 +5,24 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import luminous.StudentForum.model.Post;
+import luminous.StudentForum.repository.CategoryRepository;
+import luminous.StudentForum.repository.PostRepository;
 
 
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private PostRepository postRepo;
     
     /*@RequestMapping("/")
     // public String hello(HttpServletRequest req, Model model){
@@ -42,12 +52,11 @@ public class HomeController {
 
     @RequestMapping("/")
       public ModelAndView hello(HttpSession session,HttpServletRequest request, ModelAndView modelAndView){
-    
-        String email = "fahim@gmail.com";
-        // modelAndView.addObject("name", name);
-        session.setAttribute("age", 15);
-        modelAndView.addObject("email", email);
-        modelAndView.addObject("date", new Date(System.currentTimeMillis()));
+        modelAndView.addObject("categoryList",categoryRepository.findAll());
+        modelAndView.addObject("postList",postRepo.findAll());
+        modelAndView.addObject("postCol",postRepo.getAllPostDetails());
+        // System.out.println(postRepo.getAllPostDetails());
+
         modelAndView.setViewName("home");
         return modelAndView;
     }

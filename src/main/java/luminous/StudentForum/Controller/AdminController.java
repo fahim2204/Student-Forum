@@ -43,7 +43,7 @@ public class AdminController {
 
     @PostMapping("/admin/category")
     public String CategoryCreate(@Valid Category category, BindingResult result){
-        if(category.getCname() != null){
+        if(categoryRepository.findByCname(category.getCname()) != null){
             result.addError(new FieldError("category", "cname", "Category Already exists!!"));
         }
         if(result.hasErrors()){

@@ -42,6 +42,9 @@ public class Post {
     @Column(nullable = false)
     private String createdAt = new Date(System.currentTimeMillis()).toString();
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="fk_category_id", referencedColumnName = "id" )
+    private Category category;
 
     public Short getId() {
         return this.id;
@@ -88,8 +91,17 @@ public class Post {
     }
 
     
+    
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    public Category getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

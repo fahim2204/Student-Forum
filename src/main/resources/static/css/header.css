@@ -1,4 +1,10 @@
-:root {
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,700&display=swap'); */
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;1,700&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Playfair+Display+SC:ital,wght@0,400;1,700&display=swap');
+ :root {
     --colrA: #3B8BEB;
     --colrB: #B23850;
     --colrC: #E7E3D4;
@@ -14,5 +20,35 @@ body {
 
 .sf-header {
     height: 60px;
+    border-bottom: 1px solid rgb(204, 204, 204);
     /* background-color: var(--colrF); */
+}
+
+.sf-title {
+    font-family: 'Playfair Display', serif;
+    text-decoration: none;
+    color: black;
+    font-size: 2.8vw;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav a:hover {
+    background-color: #d1cfcf;
 }
