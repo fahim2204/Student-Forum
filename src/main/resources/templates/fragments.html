@@ -103,6 +103,7 @@
 </div>
 
 
+
 <!-- Admin SideBar Fragments -->
 <div th:fragment="admin-sidebar">
     <ul>
@@ -119,7 +120,65 @@
 
 <!-- Footer Section -->
 <div th:fragment="footer">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <footer class="bg-dark">
+        <div class="container mt-4 pt-3">
+            <div class="row text-muted">
+                <div class="col-sm-12 col-md-6">
+                    <h4>About</h4>
+                    <p class="text-justify">Student Portal is an initiative to help Students with the answer.Biggest online learning platform in Bangladesh! Post questions about anything, get help from experts and share expertise with others.</p>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('posts.view.cat', 'math') }}">Math</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'physics') }}">Physics</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'chemistry') }}">Chemistry</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'biology') }}">Biology</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'progamming') }}">Progamming</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'gk') }}">General Knowledge</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'economics') }}">Economics</a></li>
+                        <li><a href="{{ route('posts.view.cat', 'exam-prep') }}">Exam Preperation</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                        <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                        <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                        <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}"><b>Admin Panel</b></a></li>
+                        <li sec:authorize="hasRole('ROLE_MODERATOR')"><a th:href="@{/moderator}"><b>Moderator Panel</b></a></li>
+                        <li sec:authorize="hasRole('ROLE_STUDENT')"><a th:href="@{/student}"><b>Student Panel</b></a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><b>Logout</b></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container pb-2">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="text-muted"> Copyright &copy; 2021 All Rights Reserved by
+                        <a class="text-white text-decoration-none text-bold" th:href="@{/}">Student Portal</a>.
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12 mt-0">
+                    <div class="text-right d-flex align-self-end justify-content-end">
+                        <a class="text-white text-end" href="#"><i class="fas fa-2x fa-arrow-alt-circle-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+
+<!-- HTML Section End with Java Script -->
+<div th:fragment="footer-end">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     </body>
 

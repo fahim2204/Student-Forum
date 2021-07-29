@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import luminous.StudentForum.model.Category;
+import luminous.StudentForum.model.User;
 import luminous.StudentForum.repository.CategoryRepository;
+import luminous.StudentForum.repository.UserRepository;
 
 @Controller
 public class AdminController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -42,11 +47,13 @@ public class AdminController {
     }
 
     @PostMapping("/admin/category")
-    public String CategoryCreate(@Valid Category category, BindingResult result){
+    public String CategoryCreate(@Valid Category category, BindingResult result, Model model){
         if(categoryRepository.findByCname(category.getCname()) != null){
             result.addError(new FieldError("category", "cname", "Category Already exists!!"));
         }
         if(result.hasErrors()){
+            List<Category> categoryList =  categoryRepository.findAll();
+            model.addAttribute("categoryList", categoryList);
             return "/admin/category";
         }else{
             categoryRepository.save(category);
@@ -71,6 +78,52 @@ public class AdminController {
     @GetMapping("/admin/category/{cname}/delete")
     public String CategoryDelete(@PathVariable("cname") String cname){
         categoryRepository.delete(categoryRepository.findByCname(cname));
+        return "redirect:/admin/category";
+    }
+
+
+    //# -----------------For User Operation----------------
+
+    @GetMapping("/admin/user")
+    public ModelAndView User(ModelAndView modelAndView){
+        List<User> userList =  userRepository.findAll();
+        modelAndView.addObject("userList", userList);
+        modelAndView.setViewName("/admin/user");
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/user")
+    public String UserCreate(@Valid Category category, BindingResult result, Model model){
+        if(categoryRepository.findByCname(category.getCname()) != null){
+            result.addError(new FieldError("category", "cname", "Category Already exists!!"));
+        }
+        if(result.hasErrors()){
+            List<Category> categoryList =  categoryRepository.findAll();
+            model.addAttribute("categoryList", categoryList);
+            return "/admin/category";
+        }else{
+            categoryRepository.save(category);
+            return "redirect:/admin/category";
+        }
+    }
+    @GetMapping("/admin/user/{username}/edit")
+    public ModelAndView UserEdit(@PathVariable("username") String username, ModelAndView modelAndView){
+        List<Category> categoryList =  categoryRepository.findAll();
+        modelAndView.addObject("categoryList", categoryList);
+        modelAndView.addObject("cname", username);
+        modelAndView.setViewName("/admin/category-edit");
+        return modelAndView;
+    }
+    @PostMapping("/admin/user/{username}/edit")
+    public String UserUpdate(@PathVariable("username") String username, @RequestParam("newcname") String newcname){
+        Category category = categoryRepository.findByCname(username);
+        category.setCname(newcname);
+        categoryRepository.save(category);
+        return "redirect:/admin/category";
+    }
+    @GetMapping("/admin/user/{username}/delete")
+    public String UserDelete(@PathVariable("username") String username){
+        categoryRepository.delete(categoryRepository.findByCname(username));
         return "redirect:/admin/category";
     }
 }
