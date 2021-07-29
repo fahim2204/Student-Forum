@@ -24,7 +24,12 @@
 
         <!-- Rich Text plugin -->
         <link rel="stylesheet" th:href="@{/rich-text-editor/richtext.min.css}">
-        <script th:src="@{/rich-text-editor/jquery.richtext.min.js}"></script>
+        <script th:src="@{/rich-text-editor/jquery.richtext.js}"></script>
+
+        <!-- Admin side panel-->
+
+
+
 
     </head>
 
@@ -103,7 +108,7 @@
     <ul>
         <li><a class="active" th:href="@{/admin}">Home</a></li>
         <li><a th:href="@{/admin/category}">Category</a></li>
-        <li><a href="#">Services</a></li>
+        <li><a th:href="@{/admin/user}">User</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Feedback</a></li>
     </ul>

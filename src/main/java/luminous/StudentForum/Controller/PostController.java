@@ -11,7 +11,10 @@ import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,21 +44,28 @@ public class PostController {
     @GetMapping("/post/create")
     public ModelAndView CreatePost(ModelAndView modelAndView){
         modelAndView.addObject("category",catRepo.findAll() );
-        modelAndView.setViewName("post-create");
         modelAndView.addObject("post", new Post());
+        modelAndView.setViewName("post-create");
         return modelAndView;
     }
     
     @PostMapping("/post/create")
-    public String CategoryCreate(@Valid Post post, BindingResult result, HttpSession session, HttpServletRequest req){
-            //User user = userRepo.findByUsername(session.getAttribute("sessUsername").toString());
-            //System.out.println(req.getParameter("category"));
-            // Category category = catRepo.findByCname(req.getParameter("category"));
+    public String CategoryCreate(@Valid Post post, BindingResult result, HttpSession session, HttpServletRequest req, Model model){
+        log.info(req.getParameter("category"));
+        if(req.getParameter("category").equals("--Select a Category--")){
+            ObjectError error = new ObjectError("catErr","Please Select a Category.");
+                result.addError(error);
+            // result.addError(new FieldError("category", "category", "Username Already exists!!"));
+        }
+            if(result.hasErrors()){
+                model.addAttribute("category",catRepo.findAll() );
+                return "post-create";
+            }else{
+                catRepo.findByCname(req.getParameter("category")).getPosts().add(post);
+                userRepo.findByUsername(session.getAttribute("sessUsername").toString()).getPosts().add(post);
+                postRepo.save(post);
+                return "redirect:/post/create";
+            }
 
-            // catRepo.findByCname(req.getParameter("category")).getPosts().add(post);
-            // userRepo.findByUsername(session.getAttribute("sessUsername").toString()).getPosts().add(post);
-            postRepo.save(post);
-            return "redirect:/post/create";
-        // }
     }
 }

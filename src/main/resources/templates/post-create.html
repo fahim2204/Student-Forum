@@ -12,25 +12,29 @@
         <div class="col-9 p-1 px-3 border border-success">
             <h1 class="text-center">Create post</h1>
 
-            <form method="POST">
+            <form method="POST" th:object="${post}">
 
                 <div class="form-group has-error">
                     <label for="category">Category</label>
-                    <select class="form-select" aria-label="Default select example" name="category">
+                    <select class="form-select" aria-label="Default select example" th:classappend="${#fields.hasErrors('global')?'is-invalid':''}" name="category">
                         <option selected>--Select a Category--</option>
                         <div th:each=" cat: ${category}">
                             <option th:value="${cat.cname}" th:text="${cat.cname}">Category</option>
                         </div>
-                      </select>
+                    </select>
+                    <!-- <div th:each="e:${#fields.errors('global')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div> -->
+                    <div th:each="err : ${#fields.errors('global')}" th:text="${err}" class="invalid-feedback d-block ms-2"></div>
                 </div>
                 <div class="form-group">
                     <label for="title">Title </label>
-                    <input type="text" class="form-control" name="title" placeholder="Your Title" />
+                    <input type="text" class="form-control" name="title" th:classappend="${#fields.hasErrors('title')?'is-invalid':''}" placeholder="Your Title" th:value="*{title}" />
+                    <div th:each="e:${#fields.errors('title')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
                 </div>
                 <div class="form-group">
                     <label for="pbody">Description</label>
-                    <textarea rows="5" class="form-control" name="pbody" id="pbody" placeholder="Type Your text Here"></textarea>
+                    <textarea rows="5" class="form-control" name="pbody" th:classappend="${#fields.hasErrors('pbody')?'is-invalid':''}" id="pbody" placeholder="Type Your text Here" th:value="*{pbody}"></textarea>
                 </div>
+                <div th:each="e:${#fields.errors('pbody')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
 
                 <div class="form-group my-2">
                     <button type="submit" class="btn btn-primary me-3">

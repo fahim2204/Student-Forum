@@ -53,8 +53,8 @@ public class HomeController {
     @RequestMapping("/")
       public ModelAndView hello(HttpSession session,HttpServletRequest request, ModelAndView modelAndView){
         modelAndView.addObject("categoryList",categoryRepository.findAll());
-        modelAndView.addObject("postList",postRepo.findAll());
-        modelAndView.addObject("postCol",postRepo.getAllPostDetails());
+        // modelAndView.addObject("postList",postRepo.findAll());
+        modelAndView.addObject("postDetails",postRepo.getAllPostDetails());
         // System.out.println(postRepo.getAllPostDetails());
 
         modelAndView.setViewName("home");

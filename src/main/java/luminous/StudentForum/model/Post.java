@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import jdk.jfr.Timestamp;
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -28,9 +30,9 @@ public class Post {
     @Size(min = 5, message = "Value must be greater than 5 character!!")
     private String title;
     
-    @Column(nullable = false, length = 5000)
+    @Column(nullable = false, length = 20000)
     @NotNull(message = "Field can''t leave empty!!")
-    @Size(min = 10, message = "Value must be greater than 10 character!!")
+    @Size(min = 20, message = "Value must be greater than 10 character!!")
     private String pbody;
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 1")
@@ -38,13 +40,10 @@ public class Post {
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 0")
     private Short views = 0;
-
+    
+    @Timestamp
     @Column(nullable = false)
-    private String createdAt = new Date(System.currentTimeMillis()).toString();
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="fk_category_id", referencedColumnName = "id" )
-    private Category category;
+    private Date createdAt = new Date(System.currentTimeMillis());
 
     public Short getId() {
         return this.id;
@@ -86,23 +85,14 @@ public class Post {
         this.views = views;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return this.createdAt;
     }
 
-    
-    
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-    
-    public Category getCategory() {
-        return this.category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+   
 
     @Override
     public String toString() {
