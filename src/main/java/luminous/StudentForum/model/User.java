@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false, length = 50)
     @NotNull(message = "Field can''t leave empty!!")
@@ -52,7 +52,7 @@ public class User {
     private String type = "student";
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 1")
-    private short status = 1;
+    private int status = 1;
 
     @OneToMany(targetEntity = Post.class, cascade = CascadeType.ALL)
     @JoinColumn(name ="fk_user_id", referencedColumnName = "id" )
@@ -60,54 +60,73 @@ public class User {
 
 
 
-    public void setId(Long id) {
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
-    public Long getId() {
-        return id;
+
+    public String getUsername() {
+        return this.username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
-    public String getName() {
-        return name;
+
+    public String getPassword() {
+        return this.password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getPassword() {
-        return password;
+
+    public String getConfirmPassword() {
+        return this.confirmPassword;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public String getType() {
-        return type;
-    }
-	public String getUsername() {
-		return username;
-	}
-	public void setUserName(String username) {
-		this.username = username;
-	}
-    public short getStatus() {
-        return status;
-    }
-    public void setStatus(short status) {
-        this.status = status;
-    }
+
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-    public String getConfirmPassword() {
-        return confirmPassword;
+
+    public String getType() {
+        return this.type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public List<Post> getPosts() {
         return this.posts;
     }
+
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+
+
+
 	@Override
 	public String toString() {
 		return "UserData [id=" + id + ", username=" + username + ", name=" + name + ", password=" + password

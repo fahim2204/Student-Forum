@@ -41,6 +41,7 @@ public class AuthenticationSuccessWithSessionHandler extends SavedRequestAwareAu
         // * Save User details into session for further use
         session.setAttribute("sessName", userService.GetLoggedUser().getName());
         session.setAttribute("sessUsername", userService.GetLoggedUser().getUsername());
+        session.setAttribute("sessUid", userService.GetLoggedUser().getId());
         session.setAttribute("sessType", userService.GetLoggedUser().getType());
         session.setAttribute("sessStatus", userService.GetLoggedUser().getStatus());
     }

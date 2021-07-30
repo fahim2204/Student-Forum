@@ -7,7 +7,7 @@
 
 
 <div class="container">
-    <div class="p-4 p-md-5 mb-4 text-white rounded" style="background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url({{fahim}})">
+    <!-- <div class="p-4 p-md-5 mb-4 text-white rounded" style="background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url({{fahim}})">
         <div class="col-md-6 px-0">
             <h1 class="display-4 fst-italic">How can be laravel workflow make 5.0x faster</h1>
             <p class="lead my-3">So we know MVC approach is meant to take work faster and it perfectly works then any other frameworks. Yet it becomes very much cumbersome sometimes..</p>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -55,7 +55,7 @@
                     <div class="row align-items-center g-0 m-2">
                         <div class="col-1 text-center">
                             <!-- Will change this picture dynamically -->
-                            <a class="text-dark" href="{{ route('profile.view', session()->get('uname')) }}"><span
+                            <a class="text-dark" th:href="@{'/user/'+${session.sessUsername}}"><span
                                     class="fas fa-user-circle fa-2x"></span></a>
                         </div>
                         <div class="col-9 pe-5">
@@ -67,43 +67,49 @@
 
                 </div>
             </div>
-            <div class="btn-group mt-4">
-                <a href="{{ route('home') }}" class="btn btn-primary active" aria-current="page">Question</a>
-                <a href="{{ route('blog') }}" class="btn btn-primary">Blogs</a>
-            </div>
             <h3 class="pb-2 mb-2 mt-3 fst-italic border-bottom">
-                Trending Questions
+                Recent Threads
             </h3>
 
+
+
             <div class="posts mb-3" th:each="pDetail:${postDetails}">
-                <div class="index-single-post row border rounded-3 mb-2 py-1 p-3 shadow">
+                <div class="row border rounded-3 mb-2 py-1 p-3 shadow bg-light">
                     <div class="row g-0">
                         <!-- Post info section -->
                         <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
                             <div class="text-primary">
-                                <a href="{{ route('posts.view.cat', $post->category->name) }}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
+                                <a th:href="@{'/posts/'+${pDetail[1]}}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
                             </div>
                             <div class="mx-1">|</div>
                             <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">Posted By
                             </div>
-                            <a href="{{ route('profile.view', $post->user->uname) }}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
+                            <a th:href="@{'/user/'+${pDetail[0]}}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
                             <div class="lh-sm text-danger align-self-end" th:text="'on '+${#calendars.format({pDetail[4]}, 'dd-MMM-yyyy hh:mm a')}" style="font-size: 12px">created_at</div>
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">
                             <div class="fs-4 fw-bold my-1" th:text="${pDetail[3]}">post title</div>
                         </div>
-                        <div class="ms-3 pe-3 col-12 mb-2">
-                            <div th:utext="${pDetail[2]}">Read More</div>
+                        <div class="ms-3 pe-3 col-12 mb-2 sidebar-box">
+                            <div th:utext="${pDetail[2]}">Read</div>
+                            <p class="read-more mb-0"></p>
+                        </div>
+                        <div class="my-0 py-0 text-center">
+                            <a th:href="@{'/posts/'+${pDetail[1]}+'/'+${pDetail[7]}}" class="text-muted">Continue Reading...</a>
                         </div>
                         <div class="col-6 d-flex align-items-center border-top py-2 mt-3 ">
                             <div class="bg-light rounded-3 d-flex px-2 py-2">
                                 <span class="fas fa-arrow-alt-circle-up me-1"></span>
                                 <span class="fas fa-arrow-alt-circle-down ms-1"></span>
                             </div>
-                            <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>comments
+                            <div class="mx-3"><i class="fas fa-comment-dots me-1"></i>
+                                <span th:text="${pDetail[6]}">comments</span>
                             </div>
-                            <div class="me-3" th:text="${pDetail[5]}"><i class="fas fa-eye me-1"></i>post views</div>
+                            <div class="me-3"><i class="fas fa-eye me-1"></i>
+                                <span th:text="${pDetail[5]}">post views</span>
+                            </div>
+
                         </div>
                         <div class="col-6 justify-content-end d-flex align-items-center border-top py-2 mt-3 ">
                             <div class="mx-3"><i class="far fa-heart me-1"></i></i><a href="">Favourite</a></div>
@@ -122,11 +128,6 @@
 
         <div class="col-md-4">
             <div class="position-sticky" style="top: 2rem;">
-                <div class="p-4 mb-3 bg-light rounded">
-                    <h4 class="fst-italic">About</h4>
-                    <p class="mb-0">Biggest online learning platform in Bangladesh! Post questions about anything, get help from experts and share expertise with others.</p>
-                </div>
-
                 <div class="p-4">
                     <h4 class="fst-italic">Categories</h4>
                     <!-- Fetch all categories from Database -->
@@ -172,12 +173,5 @@
 
 
 
-
-
-
-
-
-
-
-
 <div th:insert="fragments::footer"></div>
+<div th:insert="fragments::footer-end"></div>

@@ -23,33 +23,30 @@ import jdk.jfr.Timestamp;
 public class Post {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Short id;
+    private int id;
 
     @Column(nullable=false, length=200)
     @NotNull(message = "Field can''t leave empty!!")
     @Size(min = 5, message = "Value must be greater than 5 character!!")
     private String title;
     
-    @Column(nullable = false, length = 20000)
+    @Column(nullable = false, length = 16000)
     @NotNull(message = "Field can''t leave empty!!")
     @Size(min = 20, message = "Value must be greater than 10 character!!")
     private String pbody;
 
     @Column(nullable = false, columnDefinition = "smallint(6) default 1")
-    private Short status = 1;
-
-    @Column(nullable = false, columnDefinition = "smallint(6) default 0")
-    private Short views = 0;
+    private int status = 1;
     
     @Timestamp
     @Column(nullable = false)
     private Date createdAt = new Date(System.currentTimeMillis());
 
-    public Short getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Short id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,20 +66,12 @@ public class Post {
         this.pbody = pbody;
     }
 
-    public Short getStatus() {
+    public int getStatus() {
         return this.status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(int status) {
         this.status = status;
-    }
-
-    public Short getViews() {
-        return this.views;
-    }
-
-    public void setViews(Short views) {
-        this.views = views;
     }
 
     public Date getCreatedAt() {
@@ -101,7 +90,6 @@ public class Post {
             ", title='" + getTitle() + "'" +
             ", pbody='" + getPbody() + "'" +
             ", status='" + getStatus() + "'" +
-            ", views='" + getViews() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             "}";
     }

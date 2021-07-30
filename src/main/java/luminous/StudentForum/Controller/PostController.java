@@ -16,15 +16,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import luminous.StudentForum.model.Category;
+import luminous.StudentForum.model.Comment;
 import luminous.StudentForum.model.Post;
 import luminous.StudentForum.model.User;
+import luminous.StudentForum.model.View;
 import luminous.StudentForum.repository.CategoryRepository;
+import luminous.StudentForum.repository.CommentRepository;
 import luminous.StudentForum.repository.PostRepository;
 import luminous.StudentForum.repository.UserRepository;
+import luminous.StudentForum.repository.ViewRepository;
 
 @Controller
 public class PostController {
@@ -39,6 +47,11 @@ public class PostController {
     private PostRepository postRepo;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private ViewRepository viewRepo;
+    @Autowired
+    private CommentRepository commentRepo;
+    
 
 
     @GetMapping("/post/create")
@@ -68,4 +81,38 @@ public class PostController {
             }
 
     }
+
+
+    @GetMapping("/posts/{cat}/{id}")
+    public ModelAndView ViewSinglePost(@PathVariable("id") int id, @PathVariable("cat") String cat, ModelAndView modelAndView, HttpSession session, Model model){
+        
+        if(session.getAttribute("sessUid")!=null){
+            int fkuserid = (int)session.getAttribute("sessUid");
+            if(viewRepo.findByFkUserAndFkPost(fkuserid, id)==null){
+                log.info("view saved");
+                viewRepo.save(new View(fkuserid,id));
+            }else{
+                log.info("view not saved");
+            }
+        }
+        modelAndView.addObject("post", postRepo.getAllPostDetailsByID(cat,id));
+        modelAndView.addObject("categoryList",catRepo.findAll());
+        modelAndView.addObject("comments",commentRepo.findByFrPostOrderByCreatedAtDesc(id));
+        modelAndView.addObject("comment",new Comment());
+        modelAndView.setViewName("post-view-single");
+        return modelAndView;
+    }
+
+    @GetMapping("/posts")
+    public ModelAndView ViewAllPost(ModelAndView modelAndView, HttpSession session, Model model){
+        
+        // modelAndView.addObject("post", postRepo.getAllPostDetailsPagination(new PageRequest(0,4,Direction.ASC)));
+        modelAndView.addObject("categoryList",catRepo.findAll());
+        modelAndView.setViewName("all-post");
+        return modelAndView;
+    }
+
+
+
+
 }

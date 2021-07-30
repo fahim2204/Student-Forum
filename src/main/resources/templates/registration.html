@@ -30,7 +30,7 @@
             <label for="username" class="form-label fw-bold ">Username:</label>
             <div class="input-group ">
                 <span class="input-group-text "> <i class="fas fa-user"></i></span>
-                <input type="text " name="userName" class="form-control rounded-end" th:classappend="${#fields.hasErrors('username')?'is-invalid':''}" id="username" placeholder="Enter a Username " th:value="*{username}">
+                <input type="text " name="username" class="form-control rounded-end" th:classappend="${#fields.hasErrors('username')?'is-invalid':''}" id="username" placeholder="Enter a Username " th:value="*{username}">
             </div>
             <div th:each="e:${#fields.errors('username')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
         </div>

@@ -3,17 +3,26 @@ package luminous.StudentForum.repository;
 import java.util.Collection;
 import java.util.List;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import luminous.StudentForum.model.Post;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Short> {   
+public interface PostRepository extends JpaRepository<Post, Integer> {   
 
-   @Query(value="SELECT username, cname, pbody, title, created_at, views FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id", nativeQuery = true)
-   public List<Collection> getAllPostDetails();
+   @Query(value="SELECT username, cname, pbody, title, created_at, (SELECT COUNT(id) FROM views WHERE fk_post=p.id) AS views, (SELECT COUNT(id) FROM comments WHERE fr_post=p.id) AS comments, p.id FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id ORDER BY p.created_at DESC LIMIT 6", nativeQuery = true)
+   public Collection getAllPostDetails();
+
+   @Query(value="SELECT username, cname, pbody, title, created_at, (SELECT COUNT(id) FROM views WHERE fk_post=p.id) AS views, (SELECT COUNT(id) FROM comments WHERE fr_post=p.id) AS comments, p.id FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id ORDER BY p.created_at DESC", nativeQuery = true)
+   public Collection getAllPostDetailsPagination(PageRequest pageRequest);
+
+   @Query(value="SELECT username, cname, pbody, title, created_at, (SELECT COUNT(id) FROM views WHERE fk_post=p.id) AS views, (SELECT COUNT(id) FROM comments WHERE fr_post=p.id) AS comments, p.id FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id WHERE p.id=?2 AND c.cname=?1", nativeQuery = true)
+   public Collection getAllPostDetailsByID(String cat,int id);
 
 
 }

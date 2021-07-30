@@ -39,7 +39,7 @@ public class WebSecurityConfigaration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("username").defaultSuccessUrl("/").successHandler(successHandler)
                 .and()
-                .logout().invalidateHttpSession(true).clearAuthentication(true)
+                .logout().invalidateHttpSession(true).clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll();
         // .httpBasic();
 

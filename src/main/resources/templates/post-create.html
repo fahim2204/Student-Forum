@@ -22,7 +22,6 @@
                             <option th:value="${cat.cname}" th:text="${cat.cname}">Category</option>
                         </div>
                     </select>
-                    <!-- <div th:each="e:${#fields.errors('global')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div> -->
                     <div th:each="err : ${#fields.errors('global')}" th:text="${err}" class="invalid-feedback d-block ms-2"></div>
                 </div>
                 <div class="form-group">
@@ -32,7 +31,9 @@
                 </div>
                 <div class="form-group">
                     <label for="pbody">Description</label>
-                    <textarea rows="5" class="form-control" name="pbody" th:classappend="${#fields.hasErrors('pbody')?'is-invalid':''}" id="pbody" placeholder="Type Your text Here" th:value="*{pbody}"></textarea>
+                    <div class="bg-white">
+                        <textarea rows="5" class="form-control bg-white" name="pbody" th:classappend="${#fields.hasErrors('pbody')?'is-invalid':''}" id="pbody" placeholder="Type Your text Here" th:value="*{pbody}"></textarea>
+                    </div>
                     <div th:each="e:${#fields.errors('pbody')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
                 </div>
 
@@ -51,17 +52,13 @@
     </div>
 </div>
 <script>
-    // $("#pbody").richText();
     $(document).ready(function() {
         $('#pbody').summernote({
-
+            placeholder: 'Write you post here..',
             height: 300, // set editor height
-            minHeight: null, // set minimum height of editor
-            maxHeight: null, // set maximum height of editor
-            focus: true // set focus to editable area after initializing summernote
-
         });
     });
 </script>
 
 <div th:insert="fragments::footer"></div>
+<div th:insert="fragments::footer-end"></div>

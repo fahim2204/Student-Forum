@@ -52,3 +52,50 @@ body {
 .nav a:hover {
     background-color: #d1cfcf;
 }
+
+.sf-profile {
+    position: relative;
+}
+
+.sf-profile:hover {
+    cursor: pointer;
+}
+
+.sf-profile .sf-profile-menu {
+    display: none;
+    z-index: 200;
+    top: 40px;
+    position: absolute;
+    background-color: rgb(247, 247, 247);
+    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.sf-profile-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.sf-profile-menu>div:hover {
+    border-bottom: 1px solid rgb(175, 174, 174);
+    cursor: pointer;
+    /* transform: scale(1.05); */
+}
+
+.sf-notification {
+    position: relative;
+}
+
+.sf-notification:hover {
+    cursor: pointer;
+}
+
+.sf-notification #notification-sec {
+    display: none;
+    z-index: 200;
+    top: 40px;
+    position: absolute;
+    background-color: rgb(247, 247, 247);
+    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}

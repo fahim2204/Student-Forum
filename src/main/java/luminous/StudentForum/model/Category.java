@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
+    private int id;
 
     @Column(nullable = false, unique = true, length = 50)
     @NotNull(message = "Field can''t leave empty!!")
@@ -30,11 +30,11 @@ public class Category {
     @JoinColumn(name ="fk_category_id", referencedColumnName = "id" )
     private List<Post> posts;
 
-    public Short getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Short id) {
+    public void setId(int id) {
         this.id = id;
     }
 
