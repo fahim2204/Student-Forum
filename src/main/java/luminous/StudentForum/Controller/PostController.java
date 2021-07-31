@@ -1,7 +1,7 @@
 package luminous.StudentForum.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,21 +9,18 @@ import javax.validation.Valid;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import luminous.StudentForum.model.Category;
 import luminous.StudentForum.model.Comment;
 import luminous.StudentForum.model.Post;
 import luminous.StudentForum.model.User;
@@ -103,10 +100,32 @@ public class PostController {
         return modelAndView;
     }
 
-    @GetMapping("/posts")
-    public ModelAndView ViewAllPost(ModelAndView modelAndView, HttpSession session, Model model){
+    @GetMapping("/posts/page/{page}")
+    public ModelAndView ViewAllPost(@PathVariable("page") int page, ModelAndView modelAndView, HttpSession session, Model model){
+
+        Pageable pageable = PageRequest.of(page-1, 5);
+        Page<Collection> allPost = postRepo.getAllPostDetailsPagination(pageable);
         
-        // modelAndView.addObject("post", postRepo.getAllPostDetailsPagination(new PageRequest(0,4,Direction.ASC)));
+        modelAndView.addObject("postDetails", allPost);
+        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("totalPages", allPost.getTotalPages());
+        log.info(postRepo.getAllPostDetailsPagination(pageable));
+        log.info(allPost.getTotalPages());
+        modelAndView.addObject("categoryList",catRepo.findAll());
+        modelAndView.setViewName("all-post");
+        return modelAndView;
+    }
+    @GetMapping("/posts/{cat}/page/{page}")
+    public ModelAndView ViewCtegoryPost(@PathVariable("page") int page, @PathVariable("cat") String cat, ModelAndView modelAndView, HttpSession session, Model model){
+
+        Pageable pageable = PageRequest.of(page-1, 5);
+        Page<Collection> allPost = postRepo.getCategoryPostDetailsPagination(cat,pageable);
+        
+        modelAndView.addObject("postDetails", allPost);
+        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("totalPages", allPost.getTotalPages());
+        log.info(postRepo.getAllPostDetailsPagination(pageable));
+        log.info(allPost.getTotalPages());
         modelAndView.addObject("categoryList",catRepo.findAll());
         modelAndView.setViewName("all-post");
         return modelAndView;
