@@ -56,13 +56,13 @@
             </div>
         </div>
     </div>
-    <nav th:classappend="${totalPages==1?'d-none':'d-block'}" aria-label="...">
+    <nav th:classappend="${totalPages<=1?'d-none':'d-block'}" aria-label="...">
         <ul class="pagination">
             <li th:classappend="${currentPage==1?'disabled':''}" class="page-item">
-                <a class="page-link" th:href="@{'/posts/page/'+${currentPage-1}}" tabindex="-1" aria-disabled="true">Previous</a>
+                <a class="page-link" th:href="@{${paginationLink}+${currentPage-1}}" tabindex="-1" aria-disabled="true">Previous</a>
             </li>
-            <li th:classappend="${currentPage==i?'active':''}" th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" th:href="@{'/posts/page/'+${i}}"><span th:text="${i}"></span></a></li>
-            <li th:classappend="${currentPage==totalPages?'disabled':''}" class="page-item"><a class="page-link" th:href="@{'/posts/page/'+${currentPage+1}}">Next</a>
+            <li th:classappend="${currentPage==i?'active':''}" th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" th:href="@{${paginationLink}+${i}}"><span th:text="${i}"></span></a></li>
+            <li th:classappend="${currentPage==totalPages?'disabled':''}" class="page-item"><a class="page-link" th:href="@{${paginationLink}+${currentPage+1}}">Next</a>
             </li>
         </ul>
     </nav>

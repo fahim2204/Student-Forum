@@ -105,9 +105,10 @@ public class PostController {
 
         Pageable pageable = PageRequest.of(page-1, 5);
         Page<Collection> allPost = postRepo.getAllPostDetailsPagination(pageable);
-        
+        String paginationLink = "/posts/page/";
         modelAndView.addObject("postDetails", allPost);
         modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("paginationLink", paginationLink);
         modelAndView.addObject("totalPages", allPost.getTotalPages());
         log.info(postRepo.getAllPostDetailsPagination(pageable));
         log.info(allPost.getTotalPages());
@@ -120,8 +121,9 @@ public class PostController {
 
         Pageable pageable = PageRequest.of(page-1, 5);
         Page<Collection> allPost = postRepo.getCategoryPostDetailsPagination(cat,pageable);
-        
+        String paginationLink = "/posts/"+cat+"/page/";
         modelAndView.addObject("postDetails", allPost);
+        modelAndView.addObject("paginationLink", paginationLink);
         modelAndView.addObject("currentPage", page);
         modelAndView.addObject("totalPages", allPost.getTotalPages());
         log.info(postRepo.getAllPostDetailsPagination(pageable));

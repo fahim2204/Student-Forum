@@ -16,12 +16,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+        <!-- Jquery CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
         <!-- Custom CSS -->
         <link rel="stylesheet" th:href="@{/css/header.css}">
         <link rel="stylesheet" th:href="@{/css/home.css}">
+        <script th:src="@{/js/menu.js}"></script>
 
-        <!-- Jquery CDN -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
         <!-- include summernote css/js -->
@@ -42,15 +46,24 @@
 <div th:fragment="header">
     <div class="container sf-header">
         <div class="row flex-nowrap align-items-center h-100">
-            <div class="col-1">
-                <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" />
+            <div class="col-1 dropdown">
+                <a class="btn" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://img.icons8.com/material-outlined/30/000000/menu--v1.png" alt="menu" />
+                </a>
 
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="" th:each="cList:${categoryList}">
+                        <li><a class="dropdown-item" th:href="@{'/posts/'+${cList.cname}}+'/page/1'" th:text="${cList.cname}">Subject</a></li>
+                    </div>
+                </ul>
             </div>
+
+
             <div class="col-2">
                 <input class="form-control me-0" type="text" name="search" id="search" placeholder="search">
             </div>
             <div class="col-1">
-                <button class="btn btn-primary ms-0">Search</button>
+                <button class="btn-sm btn-primary ms-0">Search</button>
             </div>
             <div class="col-4 text-center">
                 <a class="sf-title" th:href="@{/}">Student Portal</a>
@@ -64,36 +77,23 @@
                 <!-- Header and Navmenu Section After Login -->
                 <div sec:authorize="isAuthenticated()">
                     <div class="row mx-auto">
-                        <div class="col-3 my-auto sf-notification">
-                            <button class="bg-transparent border-0" onclick="ShowNotification();">
-                                    <span class="far fa-bell fa-2x"></span>
-                                </button>
-                            <!-- Notification Start -->
-                            <div id="notification-sec">
-                                <h4 class="text-center">Notification</h4>
-                                <hr class="m-0 p-0"> @foreach (session()->get('notifs') as $notif)
-                                <div class="d-flex m-0 hover">
-                                    <div class="col-2 text-left align-self-center"><img class="rounded-circle" src="https://picsum.photos/id/100/40" /></div>
-                                    <div class="col-10">
+                        <div class="col-3 dropdown">
+                            <a class="btn" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="far fa-bell fa-2x"></span>
+                            </a>
 
-                                        <div class="ms-1">
-                                            <p class="mb-0">uname, notifmsg</p>
-                                        </div>
-                                        <div class="text-muted ms-1" style="font-size: 14px">{{$notif->created_at->diffForHumans()}}</div>
-
-                                    </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <div class="" th:each="cList:${categoryList}">
+                                    <li><a class="dropdown-item" th:href="@{'/posts/'+${cList.cname}}+'/page/1'" th:text="${cList.cname}">Subject</a></li>
                                 </div>
-                                <hr class="m-0 p-0"> @endforeach
-                                <div class="text-center w-25 mx-auto">View All</div>
-                            </div>
-                            <!-- Notification End -->
+                            </ul>
                         </div>
                         <div class="col-9">
                             <div class="row sf-profile" onclick="ShowProfileSec();">
                                 <div class="col-3  my-auto"><span class="fas fa-user-alt fa-2x"></span></div>
                                 <div class="col-7 my-auto">
-                                    <div style="font-size: 1vw" th:if="${session.sessName}!=null" th:text="${#strings.toUpperCase(session.sessName)}">Name</div>
-                                    <div class="text-muted" style="font-size: 0.75vw" th:text="${#strings.toUpperCase(session.sessType)}">Type</div>
+                                    <div class="sf-username" th:if="${session.sessName}!=null" th:text="${#strings.toUpperCase(session.sessName)}">Name</div>
+                                    <div class="text-muted sf-usertype" th:text="${#strings.toUpperCase(session.sessType)}">Type</div>
                                 </div>
                                 <div class="col-2 d-flex align-self-center justify-content-center">
                                     <img class="button" src="https://img.icons8.com/ios/20/000000/circled-chevron-down.png" alt="show-menu" />
@@ -124,11 +124,6 @@
                                         var prof = document.getElementById("profile-sec");
                                         prof.style.display = ((prof.style.display != 'block') ? 'block' : 'none')
                                     }
-
-                                    function ShowNotification() {
-                                        var notif = document.getElementById("notification-sec");
-                                        notif.style.display = ((notif.style.display != 'block') ? 'block' : 'none')
-                                    }
                                 </script>
                                 <!-- Float Menu option End -->
 
@@ -147,7 +142,7 @@
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
                 <div th:each="cList:${categoryList}">
-                    <a class="p-2 btn link-secondary" th:href="@{'/posts/'+${cList.cname}}" th:text="${cList.cname}">Subject</a>
+                    <a class="p-2 btn link-secondary" th:href="@{'/posts/'+${cList.cname}}+'/page/1'" th:text="${cList.cname}">Subject</a>
                 </div>
             </nav>
         </div>
@@ -157,14 +152,47 @@
 
 
 <!-- Admin SideBar Fragments -->
-<div th:fragment="admin-sidebar">
-    <ul>
+<div th:fragment="admin-sidebar(toActive)">
+    <!-- <ul>
         <li><a class="active" th:href="@{/admin}">Home</a></li>
         <li><a th:href="@{/admin/category}">Category</a></li>
         <li><a th:href="@{/admin/user}">User</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Feedback</a></li>
-    </ul>
+    </ul> -->
+
+    <div class="dashboard-nav">
+        <nav class="dashboard-nav-list">
+            <!-- <a th:href="@{/admin}" class="dashboard-nav-item"><i class="fas fa-home"></i>Home </a> -->
+            <a th:classappend="${toActive=='dashboard' ? 'active':''}" th:href="@{/admin}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> dashboard</a>
+            <a th:classappend="${toActive=='category' ? 'active':''}" th:href="@{/admin/category}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Category </a>
+            <a th:classappend="${toActive=='user' ? 'active':''}" th:href="@{/admin/user}" class="dashboard-nav-item"><i class="fas fa-users"></i> Users </a>
+            <div class='dashboard-nav-dropdown'>
+                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> Media </a>
+                <div class='dashboard-nav-dropdown-menu'>
+                    <a href="#" class="dashboard-nav-dropdown-item">All</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Recent</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Images</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Video</a>
+                </div>
+            </div>
+            <div class='dashboard-nav-dropdown'>
+                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
+                <div class='dashboard-nav-dropdown-menu'>
+                    <a href="#" class="dashboard-nav-dropdown-item">All</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Subscribed</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Non-subscribed</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">Banned</a>
+                    <a href="#" class="dashboard-nav-dropdown-item">New</a>
+                </div>
+            </div>
+            <a href="#" class="dashboard-nav-item">
+                <i class="fas fa-cogs"></i> Settings </a>
+            <a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+            <div class="nav-item-divider"></div>
+            <a th:href="@{/logout}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+        </nav>
+    </div>
 </div>
 
 

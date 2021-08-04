@@ -5,15 +5,12 @@
 
 <div class="container">
     <div class="row mt-1">
-        <div class="col-3 p-1 border border-danger">
-            <div th:insert="fragments::admin-sidebar"></div>
-        </div>
         <!-- Create category section -->
-        <div class="col-9 p-1 px-3 border border-success">
+        <div class="col-2"></div>
+        <div class="col-8 p-1 px-3">
             <h1 class="text-center">Create post</h1>
 
             <form method="POST" th:object="${post}">
-
                 <div class="form-group has-error">
                     <label for="category">Category</label>
                     <select class="form-select" aria-label="Default select example" th:classappend="${#fields.hasErrors('global')?'is-invalid':''}" name="category">
@@ -45,10 +42,9 @@
                         Cancel
                     </a>
                 </div>
-
             </form>
-
         </div>
+        <div class="col-2"></div>
     </div>
 </div>
 <script>

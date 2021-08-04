@@ -5,11 +5,11 @@
 
 <div class="container">
     <div class="row mt-1">
-        <div class="col-3 p-1 border border-danger">
-            <div th:insert="fragments::admin-sidebar"></div>
+        <div class="col-3 p-1 ">
+            <div th:insert="fragments::admin-sidebar(category)"></div>
         </div>
         <!-- Create category section -->
-        <div class="col-9 p-1 border border-success">
+        <div class="col-9 p-1 ">
             <form class="row g-3 m-2 mt-1 mb-3" th:action="@{/admin/category}" method="POST" th:object="${category}">
                 <div class="col-auto">
                     <input type="text" class="form-control" id="cname" name="cname" th:classappend="${#fields.hasErrors('cname')?'is-invalid':''}" placeholder="Category">
