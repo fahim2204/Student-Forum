@@ -117,11 +117,35 @@ public class PostController {
         return modelAndView;
     }
     @GetMapping("/posts/{cat}/page/{page}")
-    public ModelAndView ViewCtegoryPost(@PathVariable("page") int page, @PathVariable("cat") String cat, ModelAndView modelAndView, HttpSession session, Model model){
+    public ModelAndView ViewCtegoryPost(@PathVariable("page") int page, @PathVariable("cat") String cat, ModelAndView modelAndView){
 
         Pageable pageable = PageRequest.of(page-1, 5);
         Page<Collection> allPost = postRepo.getCategoryPostDetailsPagination(cat,pageable);
         String paginationLink = "/posts/"+cat+"/page/";
+        modelAndView.addObject("postDetails", allPost);
+        modelAndView.addObject("paginationLink", paginationLink);
+        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("totalPages", allPost.getTotalPages());
+        log.info(postRepo.getAllPostDetailsPagination(pageable));
+        log.info(allPost.getTotalPages());
+        modelAndView.addObject("categoryList",catRepo.findAll());
+        modelAndView.setViewName("all-post");
+        return modelAndView;
+    }
+    /// It it will redirect to search using path variable
+    @PostMapping("/posts/search")
+    public String ViewBySearchPostRediret(HttpServletRequest req){
+        String redirecturl = "redirect:/posts/search/"+req.getParameter("search")+"/page/1";
+        return redirecturl;
+    } 
+    @GetMapping("/posts/search/{shrc}/page/{page}")
+    public ModelAndView ViewBySearchPost(@PathVariable("page") int page, @PathVariable("shrc") String shrc, ModelAndView modelAndView){
+
+        log.info("hello from search");
+        Pageable pageable = PageRequest.of(page-1, 5);
+        Page<Collection> allPost = postRepo.getBySearchPostDetailsPagination(shrc,pageable);
+        log.info(allPost);
+        String paginationLink = "/posts/search/"+shrc+"/page/";
         modelAndView.addObject("postDetails", allPost);
         modelAndView.addObject("paginationLink", paginationLink);
         modelAndView.addObject("currentPage", page);

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import luminous.StudentForum.model.Post;
 import luminous.StudentForum.repository.CategoryRepository;
 import luminous.StudentForum.repository.PostRepository;
+import luminous.StudentForum.repository.UserRepository;
 
 
 
@@ -23,6 +24,8 @@ public class HomeController {
     private CategoryRepository categoryRepository;
     @Autowired
     private PostRepository postRepo;
+    @Autowired
+    private UserRepository userRepo;
     
     /*@RequestMapping("/")
     // public String hello(HttpServletRequest req, Model model){
@@ -53,6 +56,7 @@ public class HomeController {
     @RequestMapping("/")
       public ModelAndView hello(HttpSession session,HttpServletRequest request, ModelAndView modelAndView){
         modelAndView.addObject("categoryList",categoryRepository.findAll());
+        modelAndView.addObject("userList",userRepo.findTopUser());
         // modelAndView.addObject("postList",postRepo.findAll());
         modelAndView.addObject("postDetails",postRepo.getAllPostDetails());
         // System.out.println(postRepo.getAllPostDetails());

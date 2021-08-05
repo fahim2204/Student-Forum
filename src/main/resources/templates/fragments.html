@@ -19,14 +19,11 @@
         <!-- Jquery CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-
         <!-- Custom CSS -->
         <link rel="stylesheet" th:href="@{/css/header.css}">
         <link rel="stylesheet" th:href="@{/css/home.css}">
+        <!-- Custom JS -->
         <script th:src="@{/js/menu.js}"></script>
-
-
 
         <!-- include summernote css/js -->
         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -58,13 +55,23 @@
                 </ul>
             </div>
 
+            <div class="col-3">
+                <form th:action="@{/posts/search}" method="POST">
+                    <div class="row">
+                        <div class="col-8 ">
+                            <input class="form-control my-auto" type="text" name="search" id="search" placeholder="search By Title">
+                        </div>
+                        <div class="col-4">
+                            <input type="submit" class="btn-sm btn-primary ms-0" value="Search">
+                        </div>
 
-            <div class="col-2">
-                <input class="form-control me-0" type="text" name="search" id="search" placeholder="search">
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-2">
             </div>
             <div class="col-1">
-                <button class="btn-sm btn-primary ms-0">Search</button>
-            </div>
+            </div> -->
             <div class="col-4 text-center">
                 <a class="sf-title" th:href="@{/}">Student Portal</a>
             </div>
@@ -153,14 +160,6 @@
 
 <!-- Admin SideBar Fragments -->
 <div th:fragment="admin-sidebar(toActive)">
-    <!-- <ul>
-        <li><a class="active" th:href="@{/admin}">Home</a></li>
-        <li><a th:href="@{/admin/category}">Category</a></li>
-        <li><a th:href="@{/admin/user}">User</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Feedback</a></li>
-    </ul> -->
-
     <div class="dashboard-nav">
         <nav class="dashboard-nav-list">
             <!-- <a th:href="@{/admin}" class="dashboard-nav-item"><i class="fas fa-home"></i>Home </a> -->

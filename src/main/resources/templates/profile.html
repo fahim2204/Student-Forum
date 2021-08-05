@@ -5,72 +5,120 @@
 
 
 
-<div class="" th:text="${user.username}"></div>
-<div class="" th:text="${user.name}"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-<div class='dashboard'>
-    <div class="dashboard-nav">
-        <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"><i
-                class="fas fa-anchor"></i> <span>BRAND</span></a></header>
-        <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>
-            Home </a><a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i> dashboard
-        </a><a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Upload </a>
-            <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-photo-video"></i> Media </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item">Images</a><a href="#" class="dashboard-nav-dropdown-item">Video</a></div>
-            </div>
-            <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-users"></i> Users </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a href="#" class="dashboard-nav-dropdown-item">Non-subscribed</a><a href="#" class="dashboard-nav-dropdown-item">Banned</a>
-                    <a
-                        href="#" class="dashboard-nav-dropdown-item">New</a>
+<div class="container mt-1">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <!-- @if ($user->$type->image===null) -->
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="StudentProfilePic" class="rounded-circle" width="150">
+                        <!-- <img src="{{asset('upload/'.$user->$type->image)}}" alt="StudentProfilePic" class="rounded-circle" width="150"> @endif -->
+                        <div class="mt-3">
+                            <h4 th:text="${user.name}">username</h4>
+                            <p th:text="${user.username}" class="text-secondary mb-1">Type</p>
+                            <button class="btn btn-primary">Follow</button>
+                            <a class="btn btn-outline-primary" href="#">Message</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-money-check-alt"></i> Payments </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item"> Projections</a>
+            <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap rounded-top bg-primary text-white">Social Link</li>
+                    @foreach ($slinks as $slink)
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap p-0 px-3">
+                        <h6 class="mb-0"><img class="me-2 align-self-center" src="https://img.icons8.com/ios-glyphs/20/000000/link--v2.png" />{{$slink->sname}}</h6>
+                        <span class="text-secondary"><a href="{{$slink->link}}">{{$slink->link}}</a></span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div th:text="${user.name}" class="col-sm-9 text-secondary"></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $user->$type->email }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Phone</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $user->$type->contact }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Address</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{ $user->$type->address }}
+                        </div>
+                    </div>
+                    <div th:if="${user.username}==${session.sessUsername}" class="row d-flex justify-content-end">
+                        <hr class="mt-3">
+                        <div class="col-2 align-content-end">
+                            <a class="btn btn-info" href="{{ route('profile.edit') }}">Edit</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
-            <div class="nav-item-divider"></div>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
-        </nav>
-    </div>
-    <div class='dashboard-app'>
-        <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
-        <div class='dashboard-content'>
-            <div class='container'>
-                <div class='card'>
-                    <div class='card-header'>
-                        <h1>Welcome back Jim</h1>
+
+            <div class="col-md-12">
+                <div th:each="post: ${userPost}" class="container">
+                    <!-- Single Post -->
+                    <div class="row mb-3 py-3 rounded-2 border border-1 shadow-sm border-muted bg-light">
+                        <div class="col-4">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <p>0</p>
+                                    <b>Votes</b>
+                                </div>
+                                <div class="col-4">
+                                    <p th:text="${post[6]}"></p>
+                                    <b>Comment</b>
+                                </div>
+                                <div class="col-4">
+                                    <p th:text="${post[5]}"></p>
+                                    <b>Views</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="container">
+                                <h5 th:text="${post[3]}">
+                                    <a href="{{ route('posts.view.single', [$post->category->name, $post->id]) }}"></a>
+                                </h5>
+                                <div class="limit-profile-post">
+                                    <p th:utext="${post[2]}">pbody</p>
+                                </div>
+                                <a th:href="@{'/posts/'+${post[1]}+'/'+${post[7]}}" class='text-primary'>Read More</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class='card-body'>
-                        <p>Your account type is: Administrator</p>
-                    </div>
+                    <!-- Single Post end -->
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 
 

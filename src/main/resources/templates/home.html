@@ -132,10 +132,13 @@
                     <div class="card-header bg-success text-white fw-bold">
                         Top Contibutor
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="bg-light list-group-item"><span class="badge bg-info  rounded-circle me-2">1</span>An item</li>
-                        <li class="bg-light list-group-item">A second item</li>
-                        <li class="bg-light list-group-item">A third item</li>
+                    <ul th:each="uList,i : ${userList}" class="list-group list-group-flush">
+                        <a class="text-decoration-none" th:href="@{'/user/'+${uList[0]}}">
+                            <li class="bg-light list-group-item">
+                                <span th:text="${i.index+1}" class="badge bg-info  rounded-circle me-2">1</span>
+                                <span class="text-success" th:text="${uList[0]}"></span>
+                            </li>
+                        </a>
                     </ul>
                 </div>
                 <div class="p-4">
