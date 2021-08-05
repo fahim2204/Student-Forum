@@ -75,17 +75,28 @@
 
             <div class="posts mb-3" th:each="pDetail:${postDetails}">
                 <div class="row border rounded-3 mb-2 py-1 p-3 shadow bg-light">
-                    <div class="row g-0">
+                    <div class="row">
                         <!-- Post info section -->
-                        <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                            <div class="text-primary">
-                                <a th:href="@{'/posts/'+${pDetail[1]}+'/page/1'}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
+                        <div class="col-12 d-flex align-items-center ms-2 mb-1">
+                            <div class="row w-100">
+                                <div class="col-8 d-flex align-items-center">
+                                    <div class="text-primary">
+                                        <a th:href="@{'/posts/'+${pDetail[1]}+'/page/1'}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
+                                    </div>
+                                    <div class="mx-1">|</div>
+                                    <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">Posted By
+                                    </div>
+                                    <a th:href="@{'/user/'+${pDetail[0]}}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
+                                    <div class="lh-sm text-danger align-self-end" th:text="'on '+${#calendars.format({pDetail[4]}, 'dd-MMM-yyyy hh:mm a')}" style="font-size: 12px">created_at</div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-end">
+                                    <div th:if="${pDetail[0]}==${session.sessUsername}" class="">
+                                        <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mx-1">|</div>
-                            <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">Posted By
-                            </div>
-                            <a th:href="@{'/user/'+${pDetail[0]}}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
-                            <div class="lh-sm text-danger align-self-end" th:text="'on '+${#calendars.format({pDetail[4]}, 'dd-MMM-yyyy hh:mm a')}" style="font-size: 12px">created_at</div>
+
                         </div>
                         <!-- Post header section  -->
                         <div class="col-12 ps-2 border-top">
@@ -128,17 +139,18 @@
 
         <div class="col-md-3">
             <div class="position-sticky" style="top: 2rem;">
-                <div class="card shadow">
+
+                <div class="shadow bg-light">
                     <div class="card-header bg-success text-white fw-bold">
                         Top Contibutor
                     </div>
-                    <ul th:each="uList,i : ${userList}" class="list-group list-group-flush">
-                        <a class="text-decoration-none" th:href="@{'/user/'+${uList[0]}}">
-                            <li class="bg-light list-group-item">
-                                <span th:text="${i.index+1}" class="badge bg-info  rounded-circle me-2">1</span>
-                                <span class="text-success" th:text="${uList[0]}"></span>
-                            </li>
-                        </a>
+                    <ul th:each="uList,i : ${userList}" class="list-group list-group-flush border-bottom">
+                        <li class="bg-light list-group-item">
+                            <a class="text-decoration-none" th:href="@{'/user/'+${uList[0]}}">
+                                <span th:text="${i.index+1}" class="badge bg-primary  rounded-circle me-2">1</span>
+                                <span class="text-secondary" th:text="${uList[0]}" style="font-family: 'Acme', sans-serif;"></span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="p-4">

@@ -3,6 +3,7 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;1,700&display=swap'); */
 
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Playfair+Display+SC:ital,wght@0,400;1,700&display=swap');
  :root {
     --colrA: #3B8BEB;
@@ -16,12 +17,6 @@
 
 body {
     background-color: var(--colrG);
-}
-
-.sf-header {
-    height: 60px;
-    border-bottom: 1px solid rgb(204, 204, 204);
-    /* background-color: var(--colrF); */
 }
 
 .sf-title {
@@ -51,26 +46,11 @@ body {
     }
 }
 
-.nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
+.sf-cat-nav {
     border-bottom: 1px solid rgb(204, 204, 204);
 }
 
-.nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-}
-
-.nav a:hover {
+.sf-cat-nav a:hover {
     background-color: #d1cfcf;
 }
 
