@@ -164,8 +164,9 @@
         <nav class="dashboard-nav-list">
             <!-- <a th:href="@{/admin}" class="dashboard-nav-item"><i class="fas fa-home"></i>Home </a> -->
             <a th:classappend="${toActive=='dashboard' ? 'active':''}" th:href="@{/admin}" class="dashboard-nav-item"><i class="fas fa-tachometer-alt"></i> dashboard</a>
-            <a th:classappend="${toActive=='category' ? 'active':''}" th:href="@{/admin/category}" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Category </a>
+            <a th:classappend="${toActive=='category' ? 'active':''}" th:href="@{/admin/category}" class="dashboard-nav-item"><i class="fas fa-certificate"></i> Category </a>
             <a th:classappend="${toActive=='user' ? 'active':''}" th:href="@{/admin/user}" class="dashboard-nav-item"><i class="fas fa-users"></i> Users </a>
+            <a th:classappend="${toActive=='post' ? 'active':''}" th:href="@{/admin/post}" class="dashboard-nav-item"><i class="fas fa-newspaper"></i> Posts </a>
             <div class='dashboard-nav-dropdown'>
                 <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> Media </a>
                 <div class='dashboard-nav-dropdown-menu'>

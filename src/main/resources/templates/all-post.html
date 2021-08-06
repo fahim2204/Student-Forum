@@ -14,15 +14,26 @@
         <div class="row border rounded-3 mb-2 py-1 p-3 shadow bg-light">
             <div class="row g-0">
                 <!-- Post info section -->
-                <div class="col-12 col-lg-8 d-flex align-items-center ms-2 mb-1">
-                    <div class="text-primary">
-                        <a th:href="@{'/posts/'+${pDetail[1]}+'/page/1'}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
+                <div class="col-12 d-flex align-items-center ms-2 mb-1">
+                    <div class="row w-100">
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="text-primary">
+                                <a th:href="@{'/posts/'+${pDetail[1]}+'/page/1'}" th:text="${pDetail[1]}" class="text-decoration-none">category</a>
+                            </div>
+                            <div class="mx-1">|</div>
+                            <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">Posted By
+                            </div>
+                            <a th:href="@{'/user/'+${pDetail[0]}}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
+                            <div class="lh-sm text-danger align-self-end" th:text="'on '+${#calendars.format({pDetail[4]}, 'dd-MMM-yyyy hh:mm a')}" style="font-size: 12px">created_at</div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <div th:if="${pDetail[0]}==${session.sessUsername}" class="">
+                                <a th:href="@{'/posts/edit/'+${pDetail[7]}}" class="btn btn-outline-primary py-0 btn-sm">Edit</a>
+                                <a th:href="@{'/posts/delete/'+${pDetail[7]}}" class="btn btn-outline-danger py-0 btn-sm">Delete</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mx-1">|</div>
-                    <div class="lh-sm text-muted align-self-center me-1" style="font-size: 12px">Posted By
-                    </div>
-                    <a th:href="@{'/user/'+${pDetail[0]}}" th:text="${pDetail[0]}" class="fs-6 text-success me-1 text-decoration-none">uname</a>
-                    <div class="lh-sm text-danger align-self-end" th:text="'on '+${#calendars.format({pDetail[4]}, 'dd-MMM-yyyy hh:mm a')}" style="font-size: 12px">created_at</div>
+
                 </div>
                 <!-- Post header section  -->
                 <div class="col-12 ps-2 border-top">
@@ -49,7 +60,6 @@
 
                 </div>
                 <div class="col-6 justify-content-end d-flex align-items-center border-top py-2 mt-3 ">
-                    <div class="mx-3"><i class="far fa-heart me-1"></i></i><a href="">Favourite</a></div>
                     <div class="me-3"><i class="fas fa-share me-1"></i><a href="">Share</a></div>
                     <div class="me-3"><i class="fas fa-ellipsis-h me-1"></i></div>
                 </div>

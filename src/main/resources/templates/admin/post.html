@@ -1,0 +1,49 @@
+<div th:insert="fragments::htmlhead(~{::title})">
+    <title>Posts - Student Forum</title>
+</div>
+<div th:insert="fragments::header"></div>
+
+<div class="container">
+    <div class="row mt-1">
+        <div class="col-3 p-1 ">
+            <div th:insert="fragments::admin-sidebar(post)"></div>
+        </div>
+        <div class="col-9 p-1 ">
+            <!-- View of all User list -->
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Post By</th>
+                        <th scope="col">Views</th>
+                        <th scope="col">Status</th>
+                        <th class="text-center" colspan=3 scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div th:each="pList,iterator:${postList}" th:with="i=1">
+                        <tr>
+                            <th class="text-center" scope="row" th:text="${iterator.index+1}">1</th>
+                            <td th:text="${pList[3]}">Mark</td>
+                            <td th:text="${pList[1]}">Mark</td>
+                            <td th:text="${pList[0]}">Mark</td>
+                            <td th:text="${pList[5]}">Mark</td>
+                            <div th:switch="${pList[8]}">
+                                <td th:case="1" class="text-success">Active</td>
+                                <td th:case="2" class="text-danger">Blocked</td>
+                            </div>
+                            <td class="text-center"><a class="text-success text-decoration-none p-0 px-2 overlay" data-bs-toggle="tooltip" data-bs-placement="top" title="View" th:href="@{'/posts/'+${pList[1]}+'/'+${pList[7]}}"><i class="far fa-eye"></i></a></td>
+                            <td class="text-center"><a class="text-primary text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status" th:href="@{'/admin/posts/change-status/'+${pList[7]}}"><i class="fas fa-bug"></i></a></td>
+                            <td class="text-center"><a class="text-danger text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" th:href="@{'/admin/posts/delete/'+${pList[7]}}"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:insert="fragments::footer"></div>
