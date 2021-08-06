@@ -29,12 +29,20 @@
                             <td th:text="${uList.name}">Mark</td>
                             <td th:text="${uList.type}">Mark</td>
                             <div th:switch="${uList.status}">
-                                <td th:case="1">Active</td>
-                                <td th:case="2">Blocked</td>
+                                <td class="text-center" th:case="1">
+                                    <a class="text-success" th:href="@{'/admin/user/change-status/'+${uList.username}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status">
+                                        <i class="fas fa-toggle-on"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center" th:case="2">
+                                    <a class="text-danger" th:href="@{'/admin/user/change-status/'+${uList.username}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status">
+                                        <i class="fas fa-toggle-off"></i>
+                                    </a>
+                                </td>
                             </div>
-                            <td class="text-center"><a class="text-success text-decoration-none p-0 px-2 overlay" data-bs-toggle="tooltip" data-bs-placement="top" title="View" th:href="@{'/user/'+${uList.username}}"><i class="far fa-eye"></i></a></td>
-                            <td class="text-center"><a class="text-primary text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" th:href="@{'/admin/user/'+${uList.username}+'/edit'}"><i class="fas fa-user-edit"></i></a></td>
-                            <td class="text-center"><a class="text-danger text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" th:href="@{'/admin/user/'+${uList.username}+'/delete'}"><i class="fas fa-trash-alt"></i></a></td>
+                            <td class="text-center"><a class="text-success text-decoration-none p-0 px-2 overlay" data-bs-toggle="tooltip" data-bs-placement="top" title="View" th:href="@{'/user/'+${uList.username}}"><i class="far fa-eye"></i></a>
+                            </td>
+                            <td class="text-center"><a class="text-danger text-decoration-none p-0 pe-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" th:href="@{'/admin/user/'+${uList.username}+'/delete'}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                     </div>
                 </tbody>

@@ -97,6 +97,19 @@ public class AdminController {
         return modelAndView;
     }
 
+    @GetMapping("/admin/user/change-status/{username}")
+    public String ChangeUserStatus(@PathVariable("username") String username) {
+        User oldUser = userRepository.findByUsername(username);
+        oldUser.setConfirmPassword("confirmPassword");
+        if (oldUser.getStatus() == 1) {
+            oldUser.setStatus(2);
+        } else {
+            oldUser.setStatus(1);
+        }
+        userRepository.save(oldUser);
+        return "redirect:/admin/user";
+    }
+
     @PostMapping("/admin/user")
     public String UserCreate(@Valid Category category, BindingResult result, Model model) {
         if (categoryRepository.findByCname(category.getCname()) != null) {

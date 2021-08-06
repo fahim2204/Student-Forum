@@ -168,15 +168,6 @@
             <a th:classappend="${toActive=='user' ? 'active':''}" th:href="@{/admin/user}" class="dashboard-nav-item"><i class="fas fa-users"></i> Users </a>
             <a th:classappend="${toActive=='post' ? 'active':''}" th:href="@{/admin/post}" class="dashboard-nav-item"><i class="fas fa-newspaper"></i> Posts </a>
             <div class='dashboard-nav-dropdown'>
-                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> Media </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="#" class="dashboard-nav-dropdown-item">All</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Recent</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Images</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Video</a>
-                </div>
-            </div>
-            <div class='dashboard-nav-dropdown'>
                 <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="#" class="dashboard-nav-dropdown-item">All</a>
@@ -188,7 +179,7 @@
             </div>
             <a href="#" class="dashboard-nav-item">
                 <i class="fas fa-cogs"></i> Settings </a>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+            <a th:href="@{'/user/'+${session.sessUsername}}" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
             <a th:href="@{/logout}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
         </nav>

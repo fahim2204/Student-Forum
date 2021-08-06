@@ -31,12 +31,19 @@
                             <td th:text="${pList[0]}">Mark</td>
                             <td th:text="${pList[5]}">Mark</td>
                             <div th:switch="${pList[8]}">
-                                <td th:case="1" class="text-success">Active</td>
-                                <td th:case="2" class="text-danger">Blocked</td>
+                                <td class="text-center" th:case="1">
+                                    <a class="text-success" th:href="@{'/admin/posts/change-status/'+${pList[7]}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status">
+                                        <i class="fas fa-toggle-on"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center" th:case="2">
+                                    <a class="text-danger" th:href="@{'/admin/posts/change-status/'+${pList[7]}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status">
+                                        <i class="fas fa-toggle-off"></i>
+                                    </a>
+                                </td>
                             </div>
-                            <td class="text-center"><a class="text-success text-decoration-none p-0 px-2 overlay" data-bs-toggle="tooltip" data-bs-placement="top" title="View" th:href="@{'/posts/'+${pList[1]}+'/'+${pList[7]}}"><i class="far fa-eye"></i></a></td>
-                            <td class="text-center"><a class="text-primary text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status" th:href="@{'/admin/posts/change-status/'+${pList[7]}}"><i class="fas fa-bug"></i></a></td>
-                            <td class="text-center"><a class="text-danger text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" th:href="@{'/admin/posts/delete/'+${pList[7]}}"><i class="fas fa-trash-alt"></i></a></td>
+                            <td class="text-center"><a class="text-success text-decoration-none p-0 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="View" th:href="@{'/posts/'+${pList[1]}+'/'+${pList[7]}}"><i class="far fa-eye"></i></a></td>
+                            <td class="text-center"><a class="text-danger text-decoration-none p-0 pe-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" th:href="@{'/admin/posts/delete/'+${pList[7]}}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                     </div>
                 </tbody>
