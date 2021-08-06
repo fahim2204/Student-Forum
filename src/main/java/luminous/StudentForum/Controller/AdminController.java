@@ -21,6 +21,7 @@ import luminous.StudentForum.model.Category;
 import luminous.StudentForum.model.Post;
 import luminous.StudentForum.model.User;
 import luminous.StudentForum.repository.CategoryRepository;
+import luminous.StudentForum.repository.CommentRepository;
 import luminous.StudentForum.repository.PostRepository;
 import luminous.StudentForum.repository.UserRepository;
 
@@ -33,11 +34,18 @@ public class AdminController {
     private UserRepository userRepository;
     @Autowired
     private PostRepository postRepo;
+    @Autowired
+    private CommentRepository commentRepo;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/admin")
-    public String AdminIndex() {
-        return "admin/index";
+    public ModelAndView AdminIndex(ModelAndView modelAndView) {
+        modelAndView.addObject("countCat", categoryRepository.countCategory());
+        modelAndView.addObject("countPost", postRepo.countPost());
+        modelAndView.addObject("countComment", commentRepo.countComment());
+        modelAndView.addObject("countUser", userRepository.countUser());
+        modelAndView.setViewName("/admin/index");
+        return modelAndView;
     }
 
     @GetMapping("/admin/category")

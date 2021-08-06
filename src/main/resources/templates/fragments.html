@@ -30,6 +30,10 @@
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
+        <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+
+
 
     </head>
 
@@ -167,7 +171,7 @@
             <a th:classappend="${toActive=='category' ? 'active':''}" th:href="@{/admin/category}" class="dashboard-nav-item"><i class="fas fa-certificate"></i> Category </a>
             <a th:classappend="${toActive=='user' ? 'active':''}" th:href="@{/admin/user}" class="dashboard-nav-item"><i class="fas fa-users"></i> Users </a>
             <a th:classappend="${toActive=='post' ? 'active':''}" th:href="@{/admin/post}" class="dashboard-nav-item"><i class="fas fa-newspaper"></i> Posts </a>
-            <div class='dashboard-nav-dropdown'>
+            <!-- <div class='dashboard-nav-dropdown'>
                 <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
                 <div class='dashboard-nav-dropdown-menu'>
                     <a href="#" class="dashboard-nav-dropdown-item">All</a>
@@ -176,9 +180,7 @@
                     <a href="#" class="dashboard-nav-dropdown-item">Banned</a>
                     <a href="#" class="dashboard-nav-dropdown-item">New</a>
                 </div>
-            </div>
-            <a href="#" class="dashboard-nav-item">
-                <i class="fas fa-cogs"></i> Settings </a>
+            </div> -->
             <a th:href="@{'/user/'+${session.sessUsername}}" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
             <a th:href="@{/logout}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>

@@ -17,5 +17,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	List <User> findByName(String name);
 	@Query("from User where name=?1 order by user_name")
 	List <User> findByNameSortedAsc(String name);
+
+	@Query(value="select count(*) from users", nativeQuery = true)
+	public String countUser();
     
 }

@@ -22,7 +22,12 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
    // public Collection getAllPostDetails();
    @Query(value="SELECT * FROM postdetails where status=1 LIMIT 6", nativeQuery = true)
    public Collection getAllPostDetails();
-   
+   // username = 0        // cname = 1
+   // pbody = 2           // title = 3
+   // created_at = 4     // views = 5
+   // comments = 6       // id = 7
+   // status = 8        // upvote = 9
+   // downvote = 10
    // @Query(value="SELECT username, cname, pbody, title, created_at, (SELECT COUNT(id) FROM views WHERE fk_post=p.id) AS views, (SELECT COUNT(id) FROM comments WHERE fr_post=p.id) AS comments, p.id FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id", nativeQuery = true)
    @Query(value="SELECT * FROM postdetails where status=1", nativeQuery = true)
    public Page<Collection> getAllPostDetailsPagination(Pageable pageable);
@@ -48,6 +53,13 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
    @Query(value="SELECT username, cname, pbody, title, created_at, (SELECT COUNT(id) FROM views WHERE fk_post=p.id) AS views, (SELECT COUNT(id) FROM comments WHERE fr_post=p.id) AS comments, p.id FROM posts as p JOIN categories as c ON p.fk_category_id=c.id JOIN users as u ON p.fk_user_id = u.id WHERE p.id=?1", nativeQuery = true)
    public Collection getAllPostDetailsByID(int id);
+
+   @Query(value="select count(*) from postdetails", nativeQuery = true)
+   public String countPost();
+
+
+
+
 
 
 }

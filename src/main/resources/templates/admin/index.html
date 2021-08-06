@@ -5,12 +5,57 @@
 
 <div class="container">
     <div class="row mt-1">
-        <div class="col-3 p-1">
+        <div class="col-3 p-1 ">
             <div th:insert="fragments::admin-sidebar(dashboard)"></div>
-
         </div>
         <div class="col-9 p-1 ">
-            my body
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-primary shadow">
+                        <div class="card-body card-body d-flex justify-content-between align-items-start">
+                            <div>
+                                <div th:text="${countUser}" class="h3">9.823</div>
+                                <div>Users</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-info shadow">
+                        <div class="card-body card-body d-flex justify-content-between align-items-start">
+                            <div>
+                                <div th:text="${countPost}" class="h3">9.823</div>
+                                <div>Posts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-warning shadow">
+                        <div class="card-body card-body d-flex justify-content-between align-items-start">
+                            <div>
+                                <div th:text="${countComment}" class="h3">9.823</div>
+                                <div>Comments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-danger shadow">
+                        <div class="card-body card-body d-flex justify-content-between align-items-start">
+                            <div>
+                                <div th:text="${countCat}" class="h3">9.823</div>
+                                <div>Categories</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

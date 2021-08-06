@@ -14,6 +14,7 @@ import luminous.StudentForum.model.Post;
 import luminous.StudentForum.repository.CategoryRepository;
 import luminous.StudentForum.repository.PostRepository;
 import luminous.StudentForum.repository.UserRepository;
+import luminous.StudentForum.repository.VoteRepository;
 
 
 
@@ -26,6 +27,8 @@ public class HomeController {
     private PostRepository postRepo;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private VoteRepository voteRepo;
     
     /*@RequestMapping("/")
     // public String hello(HttpServletRequest req, Model model){
@@ -59,6 +62,7 @@ public class HomeController {
         modelAndView.addObject("userList",userRepo.findTopUser());
         // modelAndView.addObject("postList",postRepo.findAll());
         modelAndView.addObject("postDetails",postRepo.getAllPostDetails());
+        // modelAndView.addObject("voteDetails",voteRepo.findAll());
         // System.out.println(postRepo.getAllPostDetails());
 
         modelAndView.setViewName("home");
