@@ -1,5 +1,5 @@
 <div th:insert="fragments::htmlhead(~{::title})">
-    <title>Create Post - Student Forum</title>
+    <title>Edit Post - Student Forum</title>
 </div>
 <div th:insert="fragments::header"></div>
 
@@ -8,13 +8,13 @@
         <!-- Create category section -->
         <div class="col-2"></div>
         <div class="col-8 p-1 px-3">
-            <h1 class="text-center">Create post</h1>
+            <h1 class="text-center">Edit post</h1>
 
             <form method="POST" th:object="${post}">
                 <div class="form-group has-error">
                     <label for="category">Category</label>
-                    <select class="form-select" aria-label="Default select example" th:classappend="${#fields.hasErrors('global')?'is-invalid':''}" name="category">
-                        <option selected>--Select a Category--</option>
+                    <select class="form-select" aria-label="Default select example" th:classappend="${#fields.hasErrors('global')?'is-invalid':''}" name="category" id="category">
+                        <option>--Select a Category--</option>
                         <div th:each=" cat: ${category}">
                             <option th:value="${cat.cname}" th:text="${cat.cname}">Category</option>
                         </div>
@@ -23,8 +23,11 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Title </label>
-                    <input type="text" class="form-control" name="title" th:classappend="${#fields.hasErrors('title')?'is-invalid':''}" placeholder="Your Title" th:value="*{title}" />
+                    <input type="text" class="form-control" name="title" th:classappend="${#fields.hasErrors('title')?'is-invalid':''}" placeholder="Your Title" th:value="${oldPost[0][3]}" />
                     <div th:each="e:${#fields.errors('title')}" th:text="${e}" class="invalid-feedback d-block ms-2"></div>
+                    <!-- For Update- Hiden input -->
+                    <input type="hidden" name="oCat" id="oCat" th:value="${oldPost[0][1]}">
+                    <input type="hidden" name="obody" id="obody" th:value="${oldPost[0][2]}">
                 </div>
                 <div class="form-group">
                     <label for="pbody">Description</label>
@@ -35,8 +38,8 @@
                 </div>
 
                 <div class="form-group my-2">
-                    <button type="submit" class="btn btn-primary me-3">
-                        Create
+                    <button type="submit" class="btn btn-warning me-3">
+                        Update
                     </button>
                     <a class="btn btn-outline-danger" th:href="@{/}">
                         Cancel
@@ -49,11 +52,10 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#pbody').summernote({
-            placeholder: 'Write you post here..',
-            height: 300, // set editor height
-
-        });
+        var ocat = $('#oCat').val();
+        $("#category").val(ocat).change();
+        var HTMLstring = $('#obody').val();
+        $('#pbody').summernote('pasteHTML', HTMLstring);
     });
 </script>
 
