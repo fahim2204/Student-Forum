@@ -25,14 +25,19 @@ public class VoteController {
     public String CommentCreate(@PathVariable("postid") int postid, @PathVariable("username") String username, @PathVariable("state") int state, HttpSession session) {
         System.out.println("Called up vote");
         if (session.getAttribute("sessUsername") != null) {
-            if(voteRepo.findByFkPost(postid)==null && voteRepo.findByFkUser(username)==null){
+            if(voteRepo.findByFkUserAndFkPost(username,postid)==null){
                 voteRepo.save(new Vote(postid, username, state));
                 System.out.println("Vote saved");
-             }else{
-                 System.out.println("Vote saved");
+            }else{
+                voteRepo.delete(voteRepo.findByFkUserAndFkPost(username,postid)); 
+                System.out.println("Vote deleted");
+                voteRepo.save(new Vote(postid, username, state));
+                System.out.println("Vote new saved");
                 }
             }else{
             System.out.println("Session not found");
+            return "redirect:/login";
+
         }
         return "redirect:/";
     }

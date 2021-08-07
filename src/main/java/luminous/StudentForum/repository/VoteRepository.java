@@ -7,4 +7,5 @@ import luminous.StudentForum.model.Vote;
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
     Vote findByFkPost(int post);
     Vote findByFkUser(String username);
+    Vote findByFkUserAndFkPost(String username, int post);
 }

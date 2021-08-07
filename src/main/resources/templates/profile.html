@@ -24,13 +24,12 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-3">
+            <!-- <div class="card mt-3">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap rounded-top bg-primary text-white">Social Link</li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap bg-secondary text-white">Social Link</li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap bg-secondary text-white">Social Link</li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap bg-secondary text-white">Social Link</li>
-                    <!-- @foreach ($slinks as $slink) -->
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap p-0 px-3">
                         <h6 class="mb-0"><img class="me-2 align-self-center" src="https://img.icons8.com/ios-glyphs/20/000000/link--v2.png" />{{$slink->sname}}</h6>
                         <span class="text-secondary"><a href="{{$slink->link}}">{{$slink->link}}</a></span>
@@ -39,9 +38,8 @@
                         <h6 class="mb-0"><img class="me-2 align-self-center" src="https://img.icons8.com/ios-glyphs/20/000000/link--v2.png" />{{$slink->sname}}</h6>
                         <span class="text-secondary"><a href="{{$slink->link}}">{{$slink->link}}</a></span>
                     </li>
-                    <!-- @endforeach -->
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class="col-md-8">
             <div class="card mb-3">
@@ -58,7 +56,7 @@
                             <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ $user->$type->email }}
+                            Unknown
                         </div>
                     </div>
                     <hr>
@@ -67,7 +65,7 @@
                             <h6 class="mb-0">Phone</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ $user->$type->contact }}
+                            Unknown
                         </div>
                     </div>
                     <hr>
@@ -76,7 +74,7 @@
                             <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            {{ $user->$type->address }}
+                            Unknown
                         </div>
                     </div>
                     <div th:if="${user.username}==${session.sessUsername}" class="row d-flex justify-content-end">
